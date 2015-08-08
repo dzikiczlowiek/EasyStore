@@ -6,7 +6,6 @@
 
     public interface ICommitEvents
     {
-        //TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate;
 
 
     }

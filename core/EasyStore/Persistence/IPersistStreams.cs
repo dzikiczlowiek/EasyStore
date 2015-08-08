@@ -5,5 +5,7 @@
     public interface IPersistStreams : IDisposable, ICommitEvents
     {
         void Initialize();
+
+        ICommit Commit(CommitAttempt commitAttempt);
     }
 }

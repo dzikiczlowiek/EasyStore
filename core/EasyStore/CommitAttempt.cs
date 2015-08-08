@@ -1,7 +1,6 @@
-﻿namespace EasyStore.Persistence
+﻿namespace EasyStore
 {
     public class CommitAttempt
     {
-
     }
 }

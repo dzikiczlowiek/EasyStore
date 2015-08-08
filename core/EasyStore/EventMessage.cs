@@ -14,12 +14,6 @@
         [DataMember]
         public object Body { get; set; }
 
-        public string BodyType
-        {
-            get
-            {
-                return this.Body.GetType().FullName;
-            }
-        }
+        public string BodyType { get; set; }
     }
 }
