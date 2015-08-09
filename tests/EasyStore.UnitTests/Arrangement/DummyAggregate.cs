@@ -1,4 +1,4 @@
-﻿namespace EasyStore.UnitTests.Domain
+﻿namespace EasyStore.UnitTests.Arrangement
 {
     using System;
 
@@ -9,8 +9,6 @@
         private DummyAggregate(Guid aggregateId)
             : base(aggregateId)
         {
-            this.RegisteredRoutes.Register<DummyChangedAgeEvent>(this.ApplyChangeAge);
-            this.RegisteredRoutes.Register<DummyChangedNameEvent>(this.ApplyChangeName);
         }
 
         public string Name { get; private set; }
@@ -32,12 +30,12 @@
             this.RaiseEvent(new DummyChangedAgeEvent(age));
         }
 
-        private void ApplyChangeName(DummyChangedNameEvent @event)
+        private void Apply(DummyChangedNameEvent @event)
         {
             this.Name = @event.Name;
         }
 
-        private void ApplyChangeAge(DummyChangedAgeEvent @event)
+        private void Apply(DummyChangedAgeEvent @event)
         {
             this.Age = @event.Age;
         }

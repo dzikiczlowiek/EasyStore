@@ -19,11 +19,13 @@
             this.Id = aggregateId;
             if (eventRouter == null)
             {
-                return;
+                this._eventRouter = new EventRouter(true, this);
             }
-
-            this._eventRouter = eventRouter;
-            this._eventRouter.Register(this);
+            else
+            {
+                this._eventRouter = eventRouter;
+                this._eventRouter.Register(this);
+            }
         }
 
         public int Version { get; private set; }
@@ -32,8 +34,9 @@
         {
             get
             {
-                return this._eventRouter ?? (this._eventRouter = new EventRouter(true, this));
+                return this._eventRouter;
             }
+
             set
             {
                 if (value == null)
@@ -45,10 +48,19 @@
             }
         }
 
-        protected void RaiseEvent(IDomainEvent @event)
+        public virtual bool Equals(IAggregate other)
         {
-            ((IAggregate)this).ApplyEvent(@event);
-            this._uncommittedEvents.Add(@event);
+            return null != other && other.Id == this.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as IAggregate);
         }
 
         void IAggregate.ApplyEvent(IDomainEvent eventData)
@@ -67,19 +79,10 @@
             this._uncommittedEvents.Clear();
         }
 
-        public virtual bool Equals(IAggregate other)
+        protected void RaiseEvent(IDomainEvent @event)
         {
-            return null != other && other.Id == this.Id;
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as IAggregate);
+            ((IAggregate)this).ApplyEvent(@event);
+            this._uncommittedEvents.Add(@event);
         }
     }
 }

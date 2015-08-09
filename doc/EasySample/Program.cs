@@ -5,6 +5,7 @@
 
     using EasySample.Domain;
 
+    using EasyStore;
     using EasyStore.CommonDomain;
 
     using Newtonsoft.Json;
@@ -21,6 +22,14 @@
             foreach (var @event in (note as IAggregate).GetUncommittedEvents())
             {
                 Debug.WriteLine(JsonConvert.SerializeObject(@event));
+            }
+
+            var store = new EventStore(null);
+            using (var stream = store.OpenStream("ST1"))
+            {
+
+
+                stream.CommitChanges(Guid.NewGuid());
             }
         }
     }

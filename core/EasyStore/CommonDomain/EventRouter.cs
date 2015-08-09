@@ -44,7 +44,6 @@
                 throw new ArgumentNullException("aggregate");
             }
 
-            // Get instance methods named Apply with one parameter returning void
             var applyMethods =
                 aggregate.GetType()
                          .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
@@ -74,7 +73,6 @@
             else if (this.throwOnApplyNotFound)
             {
                 throw new InvalidOperationException("NOT FOUND AGGREGATE ROUTE");
-                //this.registered.ThrowHandlerNotFound(eventMessage);
             }
         }
 

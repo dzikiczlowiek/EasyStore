@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
 
-    using EasyStore.CommonDomain;
+    using EasyStore.Infrastructure;
 
-    public class EventStream : IEventStream, ICommitEvents
+    public class EventStream : IEventStream
     {
-        private readonly ICollection<IAggregate> _loadedAggregates = new List<IAggregate>();
-
+        private readonly ICollection<EventMessage> _commitedEvents = new LinkedList<EventMessage>();
+        private readonly ICollection<EventMessage> _uncommitedEvents = new LinkedList<EventMessage>();
         private readonly ICommitEvents _persistence;
 
         public EventStream(string streamId, ICommitEvents persistence)
@@ -19,19 +19,45 @@
 
         public string StreamId { get; private set; }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate
+        public ICollection<EventMessage> CommittedEvents
         {
-            throw new NotImplementedException();
+            get
+            {
+                return new List<EventMessage>(this._commitedEvents);
+            }
         }
 
-        public void CommitChanges(Guid commitId)
+        public ICollection<EventMessage> UncommittedEvents
         {
-            throw new NotImplementedException();
+            get
+            {
+                return new List<EventMessage>(this._uncommitedEvents);
+            }
         }
 
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        public void Add(EventMessage uncommittedEvent)
+        {
+            Guard.NotNull(() => uncommittedEvent);
+            Guard.NotNull(() => uncommittedEvent.Body);
+
+            this._uncommitedEvents.Add(uncommittedEvent);
+        }
+
+        public void CommitChanges(Guid commitId)
+        {
+            var commiteAttempt = new CommitAttempt(this.StreamId, commitId, this._uncommitedEvents);
+            this._persistence.Commit(commiteAttempt);
+            this.ClearChanges();
+        }
+
+        public void ClearChanges()
+        {
+            this._uncommitedEvents.Clear();
         }
     }
 }
