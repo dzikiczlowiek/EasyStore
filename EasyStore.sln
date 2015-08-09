@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Persistence.SimpleData", "persistence\EasyStore.Persistence.SimpleData\EasyStore.Persistence.SimpleData.csproj", "{84F8E79F-D1B2-4215-98DC-12F15C5AB220}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{20218905-FA4C-42E5-8BF3-F59BAD1A0526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Serialization.Json", "serialization\EasyStore.Serialization.Json\EasyStore.Serialization.Json.csproj", "{D58B6EF4-5E96-4715-8E41-5EF01B865761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Serialization.Json.Tests", "serialization\EasyStore.Serialization.Json.Tests\EasyStore.Serialization.Json.Tests.csproj", "{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +51,14 @@ Global
 		{84F8E79F-D1B2-4215-98DC-12F15C5AB220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84F8E79F-D1B2-4215-98DC-12F15C5AB220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84F8E79F-D1B2-4215-98DC-12F15C5AB220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D58B6EF4-5E96-4715-8E41-5EF01B865761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58B6EF4-5E96-4715-8E41-5EF01B865761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D58B6EF4-5E96-4715-8E41-5EF01B865761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58B6EF4-5E96-4715-8E41-5EF01B865761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +69,7 @@ Global
 		{CE2C14EA-3883-401B-9078-019F2E100AA4} = {8B64C7EE-9AB8-4FCE-8E6B-9FE8203AD38A}
 		{BEBD4A78-FC2D-4C0A-93D2-165DD95DAE49} = {74B80BC7-D87F-4C09-B893-E7B075A5F8F0}
 		{84F8E79F-D1B2-4215-98DC-12F15C5AB220} = {93C82AD6-38F3-46AB-8559-1E67AE0C7B60}
+		{D58B6EF4-5E96-4715-8E41-5EF01B865761} = {20218905-FA4C-42E5-8BF3-F59BAD1A0526}
+		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F} = {20218905-FA4C-42E5-8BF3-F59BAD1A0526}
 	EndGlobalSection
 EndGlobal

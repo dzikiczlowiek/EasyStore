@@ -1,4 +1,4 @@
-﻿namespace EasyStore.UnitTests.Arrangement
+﻿namespace EasyStore.Tests.Common.Arrangement
 {
     using EasyStore.CommonDomain;
 

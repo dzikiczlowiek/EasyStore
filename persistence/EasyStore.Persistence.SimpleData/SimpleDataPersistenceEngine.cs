@@ -1,5 +1,6 @@
 ﻿namespace EasyStore.Persistence.SimpleData
 {
+    using System;
     using System.Collections.Generic;
 
     using Simple.Data;
@@ -8,9 +9,27 @@
     {
         private readonly dynamic _db;
 
-        public SimpleDataPersistenceEngine(string connectionName)
+        private readonly ISerialize _serializer;
+
+        public SimpleDataPersistenceEngine(string connectionName, ISerialize serializer)
         {
             this._db = Database.OpenNamedConnection(connectionName);
+            this._serializer = serializer;
+        }
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<EventMessage> GetAggregateEvents(Guid aggregateId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<EventMessage> GetAggregateEventsToVersion(Guid aggregateId, int version)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void Dispose()
@@ -23,21 +42,19 @@
             throw new System.NotImplementedException();
         }
 
-        ICommit IPersistStreams.Commit(CommitAttempt commitAttempt)
-        {
-
-            throw new System.NotImplementedException();
-        }
-
-        public void Initialize()
+        public ICommit Commit(CommitAttempt attempt)
         {
             throw new System.NotImplementedException();
         }
 
-        ICommit ICommitEvents.Commit(CommitAttempt attempt)
+        public Snapshot GetSnapshotOfAggregate(Guid aggregateId)
         {
             throw new System.NotImplementedException();
         }
 
+        public Snapshot GetSnapshotOfAggregateUpToVersion(Guid aggregateId, int maxVersion)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

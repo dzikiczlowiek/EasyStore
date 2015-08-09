@@ -3,6 +3,8 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    using EasyStore.Tests.Common;
+
     using FluentAssertions;
 
     using NSubstitute;
@@ -11,6 +13,7 @@
 
     public class EventStreamTests : TestBase
     {
+        [Fact]
         public void adding_event_message_should_be_stored_in_uncommitted_events()
         {
             var streamId = A.RandomShortString();

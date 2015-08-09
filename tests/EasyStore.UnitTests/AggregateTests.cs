@@ -1,7 +1,8 @@
 ﻿namespace EasyStore.UnitTests
 {
     using EasyStore.CommonDomain;
-    using EasyStore.UnitTests.Arrangement;
+    using EasyStore.Tests.Common;
+    using EasyStore.Tests.Common.Arrangement;
 
     using FluentAssertions;
 
