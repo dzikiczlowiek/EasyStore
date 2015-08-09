@@ -3,12 +3,17 @@
     using System;
     using System.Collections.Generic;
 
+    using EasyStore.CommonDomain;
     using EasyStore.Infrastructure;
 
     public class EventStream : IEventStream
     {
         private readonly ICollection<EventMessage> _commitedEvents = new LinkedList<EventMessage>();
+
         private readonly ICollection<EventMessage> _uncommitedEvents = new LinkedList<EventMessage>();
+
+        private ISerialize _serializer;
+
         private readonly ICommitEvents _persistence;
 
         public EventStream(string streamId, ICommitEvents persistence)
@@ -58,6 +63,14 @@
         public void ClearChanges()
         {
             this._uncommitedEvents.Clear();
+        }
+
+        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) 
+            where TAggregate : class, IAggregate
+        {
+            var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
+
+            return default(TAggregate);
         }
     }
 }

@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using EasyStore.CommonDomain;
+    using Serialization;
     using Simple.Data;
 
     public class SimpleDataPersistenceEngine : IPersistStreams
@@ -24,12 +26,39 @@
 
         public IEnumerable<EventMessage> GetAggregateEvents(Guid aggregateId)
         {
-            throw new System.NotImplementedException();
+            var events = new List<EventMessage>();
+            var rawEvents = this._db.EventsLog.FindAllByAggregateId(aggregateId);
+
+            foreach (var rawEvent in rawEvents)
+            {
+                Type type = Type.GetType(rawEvent.Type);
+                var data = (byte[])rawEvent.Data;
+                var eventMessage = new EventMessage();
+                eventMessage.Body = this._serializer.Deserialize(type, data);
+                eventMessage.BodyType = type.AssemblyQualifiedName;
+                events.Add(eventMessage);
+            }
+
+            return events;
         }
 
         public IEnumerable<EventMessage> GetAggregateEventsToVersion(Guid aggregateId, int version)
         {
-            throw new System.NotImplementedException();
+            var events = new List<EventMessage>();
+            var rawEvents =
+                this._db.EventsLog.FindAllByAggregateId(aggregateId).Where(this._db.EventsLog.Version <= version);
+
+            foreach (var rawEvent in rawEvents)
+            {
+                Type type = Type.GetType(rawEvent.Type);
+                var data = (byte[])rawEvent.Data;
+                var eventMessage = new EventMessage();
+                eventMessage.Body = this._serializer.Deserialize(type, data);
+                eventMessage.BodyType = type.AssemblyQualifiedName;
+                events.Add(eventMessage);
+            }
+
+            return events;
         }
 
         public void Dispose()
