@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using EasyStore.CommonDomain;
     using EasyStore.Infrastructure;
@@ -12,8 +13,6 @@
 
         private readonly ICollection<EventMessage> _uncommitedEvents = new LinkedList<EventMessage>();
 
-        private ISerialize _serializer;
-
         private readonly ICommitEvents _persistence;
 
         public EventStream(string streamId, ICommitEvents persistence)
@@ -21,6 +20,15 @@
             this.StreamId = streamId;
             this._persistence = persistence;
         }
+
+        public EventStream(string streamId, int minRevision, int maxRevision, ICommitEvents persistence)
+            : this(streamId, persistence)
+        {
+            IEnumerable<ICommit> commits = persistence.GetFrom(streamId, minRevision, maxRevision);
+            this.PopulateStream(minRevision, maxRevision, commits);
+        }
+
+        public int CommitSequence { get; private set; }
 
         public string StreamId { get; private set; }
 
@@ -39,6 +47,8 @@
                 return new List<EventMessage>(this._uncommitedEvents);
             }
         }
+
+        public int StreamRevision { get; private set; }
 
         public void Dispose()
         {
@@ -65,12 +75,19 @@
             this._uncommitedEvents.Clear();
         }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) 
-            where TAggregate : class, IAggregate
+        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate
         {
             var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
 
             return default(TAggregate);
+        }
+
+        private void PopulateStream(int minRevision, int maxRevision, IEnumerable<ICommit> commits)
+        {
+            foreach (var commit in commits ?? Enumerable.Empty<ICommit>())
+            {
+                this.CommitSequence = commit.CommitSequence;
+            }
         }
     }
 }

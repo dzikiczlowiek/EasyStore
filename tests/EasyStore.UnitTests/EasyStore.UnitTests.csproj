@@ -42,6 +42,9 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\..\packages\FluentAssertions.3.5.0\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
@@ -63,8 +66,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateTests.cs" />
-    <Compile Include="EventStreamTests.cs" />
+    <Compile Include="Aggregate\AggregateTests.cs" />
+    <Compile Include="EventStore\Arrangement\CreateStreamFixture.cs" />
+    <Compile Include="EventStore\Arrangement\EventStreamValuesGenerator.cs" />
+    <Compile Include="EventStore\Arrangement\OpenStreamFixture.cs" />
+    <Compile Include="EventStore\Arrangement\PersistStreamStub.cs" />
+    <Compile Include="EventStore\Arrangement\RevisionRange.cs" />
+    <Compile Include="EventStore\CreateStreamTests.cs" />
+    <Compile Include="EventStore\OpenStreamTests.cs" />
+    <Compile Include="EventStream\EventStreamTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +90,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

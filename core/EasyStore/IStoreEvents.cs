@@ -4,6 +4,8 @@
 
     public interface IStoreEvents : IDisposable
     {
-        IEventStream OpenStream(string streamId);
+        IEventStream CreateStream(string streamId);
+
+        IEventStream OpenStream(string streamId, int minRevision, int maxRevision);
     }
 }

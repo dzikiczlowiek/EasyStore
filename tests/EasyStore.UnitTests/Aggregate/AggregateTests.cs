@@ -1,4 +1,4 @@
-﻿namespace EasyStore.UnitTests
+﻿namespace EasyStore.UnitTests.Aggregate
 {
     using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{47C6EB34-3CDD-4FE3-8A15-637A6E9977B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.UnitTests", "tests\EasyStore.UnitTests\EasyStore.UnitTests.csproj", "{94EAA54B-D799-42E7-80F4-09D093CD2FA3}"
@@ -24,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Serialization.Json", "serialization\EasyStore.Serialization.Json\EasyStore.Serialization.Json.csproj", "{D58B6EF4-5E96-4715-8E41-5EF01B865761}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Serialization.Json.Tests", "serialization\EasyStore.Serialization.Json.Tests\EasyStore.Serialization.Json.Tests.csproj", "{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Support Projects", "External Support Projects", "{FC88AD4A-D5BD-40C4-B7CE-25AB64BA8F4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyObjectBuilder", "external support projects\EasyObjectBuilder\EasyObjectBuilder.csproj", "{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,17 +65,22 @@ Global
 		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{94EAA54B-D799-42E7-80F4-09D093CD2FA3} = {47C6EB34-3CDD-4FE3-8A15-637A6E9977B3}
-		{0805A5BB-CBCE-4871-9DA3-9B15B21EBE02} = {47C6EB34-3CDD-4FE3-8A15-637A6E9977B3}
 		{CE2C14EA-3883-401B-9078-019F2E100AA4} = {8B64C7EE-9AB8-4FCE-8E6B-9FE8203AD38A}
 		{BEBD4A78-FC2D-4C0A-93D2-165DD95DAE49} = {74B80BC7-D87F-4C09-B893-E7B075A5F8F0}
+		{0805A5BB-CBCE-4871-9DA3-9B15B21EBE02} = {47C6EB34-3CDD-4FE3-8A15-637A6E9977B3}
 		{84F8E79F-D1B2-4215-98DC-12F15C5AB220} = {93C82AD6-38F3-46AB-8559-1E67AE0C7B60}
 		{D58B6EF4-5E96-4715-8E41-5EF01B865761} = {20218905-FA4C-42E5-8BF3-F59BAD1A0526}
 		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F} = {20218905-FA4C-42E5-8BF3-F59BAD1A0526}
+		{2896AB55-0EB3-4D78-AF7E-5E3EB5E9D21F} = {FC88AD4A-D5BD-40C4-B7CE-25AB64BA8F4E}
 	EndGlobalSection
 EndGlobal

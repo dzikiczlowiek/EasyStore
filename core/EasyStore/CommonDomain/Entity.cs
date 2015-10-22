@@ -4,7 +4,7 @@
 
     public abstract class Entity
     {
-        public virtual Guid Id { get; protected set; }
+        public Guid Id { get; protected set; }
 
         public bool Archived { get; protected set; }
 

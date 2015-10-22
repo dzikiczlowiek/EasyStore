@@ -9,6 +9,8 @@
     {
         string StreamId { get; }
 
+        int CommitSequence { get; }
+
         ICollection<EventMessage> CommittedEvents { get; }
 
         ICollection<EventMessage> UncommittedEvents { get; }

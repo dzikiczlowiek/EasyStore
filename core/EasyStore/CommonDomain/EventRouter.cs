@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Reflection;
 
-    public class EventRouter : IRouteEvents
+    public sealed class EventRouter : IRouteEvents
     {
-        private readonly IDictionary<Type, Action<object>> handlers = new Dictionary<Type, Action<object>>();
+        private readonly IDictionary<Type, Action<object>> _handlers = new Dictionary<Type, Action<object>>();
 
-        private readonly bool throwOnApplyNotFound;
+        private readonly bool _throwOnApplyNotFound;
 
         public EventRouter()
             : this(true)
@@ -18,7 +18,7 @@
 
         public EventRouter(bool throwOnApplyNotFound)
         {
-            this.throwOnApplyNotFound = throwOnApplyNotFound;
+            this._throwOnApplyNotFound = throwOnApplyNotFound;
         }
 
         public EventRouter(bool throwOnApplyNotFound, IAggregate aggregate)
@@ -27,7 +27,7 @@
             this.Register(aggregate);
         }
 
-        public virtual void Register<T>(Action<T> handler)
+        public void Register<T>(Action<T> handler)
         {
             if (handler == null)
             {
@@ -37,7 +37,7 @@
             this.Register(typeof(T), @event => handler((T)@event));
         }
 
-        public virtual void Register(IAggregate aggregate)
+        public void Register(IAggregate aggregate)
         {
             if (aggregate == null)
             {
@@ -54,11 +54,11 @@
             foreach (var apply in applyMethods)
             {
                 MethodInfo applyMethod = apply.Method;
-                this.handlers.Add(apply.MessageType, m => applyMethod.Invoke(aggregate, new[] { m }));
+                this._handlers.Add(apply.MessageType, m => applyMethod.Invoke(aggregate, new[] { m }));
             }
         }
 
-        public virtual void Dispatch(object eventMessage)
+        public void Dispatch(object eventMessage)
         {
             if (eventMessage == null)
             {
@@ -66,11 +66,11 @@
             }
 
             Action<object> handler;
-            if (this.handlers.TryGetValue(eventMessage.GetType(), out handler))
+            if (this._handlers.TryGetValue(eventMessage.GetType(), out handler))
             {
                 handler(eventMessage);
             }
-            else if (this.throwOnApplyNotFound)
+            else if (this._throwOnApplyNotFound)
             {
                 throw new InvalidOperationException("NOT FOUND AGGREGATE ROUTE");
             }
@@ -78,7 +78,7 @@
 
         private void Register(Type messageType, Action<object> handler)
         {
-            this.handlers[messageType] = handler;
+            this._handlers[messageType] = handler;
         }
     }
 }

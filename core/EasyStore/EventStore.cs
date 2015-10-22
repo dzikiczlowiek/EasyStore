@@ -16,11 +16,6 @@
             this._persistence = persistence;
         }
 
-        public IEventStream OpenStream(string streamId)
-        {
-            return new EventStream(streamId, this._persistence);
-        }
-
         public void Dispose()
         {
             throw new NotImplementedException();
@@ -29,6 +24,16 @@
         public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate
         {
             throw new NotImplementedException();
+        }
+
+        public IEventStream CreateStream(string streamId)
+        {
+            return new EventStream(streamId, this._persistence);
+        }
+
+        public IEventStream OpenStream(string streamId, int minRevision, int maxRevision)
+        {
+            return new EventStream(streamId, minRevision, maxRevision, this._persistence);
         }
     }
 }
