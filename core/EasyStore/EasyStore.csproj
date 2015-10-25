@@ -67,6 +67,7 @@
     <Compile Include="IStoreEvents.cs" />
     <Compile Include="CommitAttempt.cs" />
     <Compile Include="Persistence\AggregateLoader.cs" />
+    <Compile Include="Persistence\Commit.cs" />
     <Compile Include="Persistence\DefaultAggregatorConstructor.cs" />
     <Compile Include="Persistence\IAccessSnapshots.cs" />
     <Compile Include="Persistence\IConstructAggregates.cs" />

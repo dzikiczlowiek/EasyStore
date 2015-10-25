@@ -45,6 +45,7 @@
     <Compile Include="Arrangement\DummyAggregate.cs" />
     <Compile Include="Arrangement\DummyChangedAgeEvent.cs" />
     <Compile Include="Arrangement\DummyChangedNameEvent.cs" />
+    <Compile Include="Builders\CommitBuilderExtensions.cs" />
     <Compile Include="Builders\EventMessageBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
@@ -52,6 +53,10 @@
     <Compile Include="ValuesGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EasyObjectBuilder\EasyObjectBuilder\EasyObjectBuilder.csproj">
+      <Project>{C296DCEF-87BF-477C-977A-F90522A5F5CF}</Project>
+      <Name>EasyObjectBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\core\EasyStore\EasyStore.csproj">
       <Project>{ce2c14ea-3883-401b-9078-019f2e100aa4}</Project>
       <Name>EasyStore</Name>

@@ -24,7 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -78,6 +79,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\EasyObjectBuilder\EasyObjectBuilder\EasyObjectBuilder.csproj">
+      <Project>{c296dcef-87bf-477c-977a-f90522a5f5cf}</Project>
+      <Name>EasyObjectBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\core\EasyStore\EasyStore.csproj">
       <Project>{CE2C14EA-3883-401B-9078-019F2E100AA4}</Project>
       <Name>EasyStore</Name>

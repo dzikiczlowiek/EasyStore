@@ -1,6 +1,13 @@
 ﻿namespace EasyStore.UnitTests.EventStore
 {
+    using System;
+    using System.Collections.Generic;
+
+    using EasyObjectBuilder;
+
+    using EasyStore.Persistence;
     using EasyStore.Tests.Common;
+    using EasyStore.Tests.Common.Builders;
     using EasyStore.UnitTests.EventStore.Arrangement;
 
     using FluentAssertions;
@@ -28,10 +35,15 @@
         [Fact]
         public void open_stream_without_providing_revision_range_should_return_event_stream_with_all_commits_in_stream()
         {
+            var commitsBuilder = new CollectionObjectBuilder<Commit>();
+            var itemsToGenerate = 4;
+            commitsBuilder.All(x => x.CreateStandard(()=>A.RandomGuid(), A.RandomNumber()));
+
+            var commits = commitsBuilder.Build(itemsToGenerate);
+
             var streamId = A.RandomStreamId();
             var fixture = OpenStreamFixture.WithStreamId(streamId);
-            fixture.ThereIsNoCommitsForGivenStreamId();
-
+            
             var act = fixture.OpenStream();
             act();
 
