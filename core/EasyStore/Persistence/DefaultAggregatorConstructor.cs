@@ -7,16 +7,17 @@
 
     public class DefaultAggregatorConstructor : IConstructAggregates
     {
-        public IAggregate Build(Type type, Guid aggregateId)
+        public AggregateRoot Build(Type type, Guid aggregateId)
         {
             var constructor = type.GetConstructor(
                 BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(Guid) }, null);
 
-            return constructor.Invoke(new object[] { aggregateId }) as IAggregate;
+            return constructor.Invoke(new object[] { aggregateId }) as AggregateRoot;
         }
 
 
         public TAggregate Build<TAggregate>(Guid aggregateId)
+            where TAggregate : AggregateRoot
         {
             return (TAggregate)this.Build(typeof(TAggregate), aggregateId);
         }

@@ -8,14 +8,6 @@
 
     public class LoadAggregateTests : TestBase
     {
-        [Fact]
-        public void ASASA()
-        {
-            var fixture = LoadAggregateFixture.Create();
-            var aggregateId = A.RandomGuid();
-            
-            var act = fixture.LoadAggregate<DummyAggregate>(aggregateId);
-            act();
-        }
+        
     }
 }

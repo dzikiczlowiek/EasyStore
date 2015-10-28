@@ -9,6 +9,8 @@
 
         private IRouteEvents _eventRouter;
 
+        private IEventStream _stream;
+
         protected AggregateRoot(Guid aggregateId)
             : this(aggregateId, null)
         {
@@ -48,7 +50,7 @@
             }
         }
 
-        public virtual bool Equals(IAggregate other)
+        public virtual bool Equals(AggregateRoot other)
         {
             return null != other && other.Id == this.Id;
         }
@@ -56,11 +58,6 @@
         public override int GetHashCode()
         {
             return this.Id.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as IAggregate);
         }
 
         void IAggregate.ApplyEvent(IDomainEvent eventData)
@@ -79,10 +76,19 @@
             this._uncommittedEvents.Clear();
         }
 
+        void IAggregate.AttachToStream(IEventStream stream)
+        {
+            this._stream = stream;
+        }
+
         protected void RaiseEvent(IDomainEvent @event)
         {
             ((IAggregate)this).ApplyEvent(@event);
             this._uncommittedEvents.Add(@event);
+            if (this._stream != null)
+            {
+                this._stream.ForwardEvent(this.Id, @event);
+            }
         }
     }
 }

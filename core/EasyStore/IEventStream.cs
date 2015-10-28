@@ -21,8 +21,10 @@
 
         void ClearChanges();
 
-        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate;
+        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot;
 
-        void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregate;
+        void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : AggregateRoot;
+
+        void ForwardEvent(Guid id, IDomainEvent @event);
     }
 }

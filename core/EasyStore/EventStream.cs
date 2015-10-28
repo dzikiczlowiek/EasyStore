@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
 
     using EasyStore.CommonDomain;
     using EasyStore.Infrastructure;
@@ -76,24 +77,30 @@
             this._uncommitedEvents.Clear();
         }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate
+        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot
         {
             var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
             throw new NotImplementedException();
         }
 
-        public void AttachAggregate<TAggregate>(TAggregate aggregate)
-            where TAggregate : class, IAggregate
+        public void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : AggregateRoot
         {
             this._aggregates.Add(aggregate);
-            foreach (var uncommittedEvent in aggregate.GetUncommittedEvents())
+            foreach (var uncommittedEvent in ((IAggregate)aggregate).GetUncommittedEvents())
             {
-                var eventMessage = new EventMessage();
-                eventMessage.AggregateId = aggregate.Id;
-                eventMessage.Body = uncommittedEvent;
-                eventMessage.BodyType = uncommittedEvent.GetType().AssemblyQualifiedName;
-                this.Add(eventMessage);
+                ((IEventStream)this).ForwardEvent(aggregate.Id, uncommittedEvent);
             }
+
+            ((IAggregate)aggregate).AttachToStream(this);
+        }
+
+        void IEventStream.ForwardEvent(Guid aggregateId, IDomainEvent @event)
+        {
+            var eventMessage = new EventMessage();
+            eventMessage.AggregateId = aggregateId;
+            eventMessage.Body = @event;
+            eventMessage.BodyType = @event.GetType().AssemblyQualifiedName;
+            this.Add(eventMessage);
         }
     }
 }

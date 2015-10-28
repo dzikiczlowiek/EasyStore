@@ -19,7 +19,7 @@
             this._aggregatorConstructor = aggregatorConstructor;
         }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate
+        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot
         {
             TAggregate aggregate;
 
@@ -37,7 +37,7 @@
             return aggregate;
         }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId, int version) where TAggregate : IAggregate
+        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId, int version) where TAggregate : AggregateRoot
         {
             throw new NotImplementedException();
         }

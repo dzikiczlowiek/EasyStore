@@ -12,10 +12,12 @@
 
         public string StreamId { get; protected set; }
 
-        public Action AttacheAggregate(IAggregate aggregate)
+        public IEventStream Stream { get; protected set; }
+
+        public Action AttacheAggregate(AggregateRoot aggregate)
         {
-            var sut = this.CreateSut();
-            return () => sut.AttachAggregate(aggregate);
+            this.Stream = this.CreateSut();
+            return () => this.Stream.AttachAggregate(aggregate);
         }
 
         private IEventStream CreateSut()

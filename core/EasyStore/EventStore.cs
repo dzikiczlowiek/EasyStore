@@ -21,11 +21,6 @@
             throw new NotImplementedException();
         }
 
-        public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate
-        {
-            throw new NotImplementedException();
-        }
-
         public IEventStream CreateStream(string streamId)
         {
             return new EventStream(streamId, this._persistence);

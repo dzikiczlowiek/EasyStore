@@ -6,8 +6,8 @@
 
     public interface ILoadAggregates
     {
-        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : IAggregate;
+        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot;
 
-        TAggregate LoadAggregate<TAggregate>(Guid aggregateId, int version) where TAggregate : IAggregate;
+        TAggregate LoadAggregate<TAggregate>(Guid aggregateId, int version) where TAggregate : AggregateRoot;
     }
 }

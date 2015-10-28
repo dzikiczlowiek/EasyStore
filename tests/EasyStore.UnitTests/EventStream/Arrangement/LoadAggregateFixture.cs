@@ -19,7 +19,7 @@
         }
 
         public Action LoadAggregate<T>(Guid aggregateId)
-            where T : class, IAggregate
+            where T : AggregateRoot
         {
             var sut = this.CreateSut();
             return () => sut.LoadAggregate<T>(aggregateId);

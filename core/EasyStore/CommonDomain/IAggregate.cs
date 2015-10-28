@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IAggregate
+    internal interface IAggregate
     {
         Guid Id { get; }
 
@@ -14,5 +14,7 @@
         ICollection<IDomainEvent> GetUncommittedEvents();
 
         void ClearUncommittedEvents();
+
+        void AttachToStream(IEventStream stream);
     }
 }

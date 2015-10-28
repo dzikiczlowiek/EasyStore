@@ -21,7 +21,7 @@
             this._throwOnApplyNotFound = throwOnApplyNotFound;
         }
 
-        public EventRouter(bool throwOnApplyNotFound, IAggregate aggregate)
+        public EventRouter(bool throwOnApplyNotFound, AggregateRoot aggregate)
             : this(throwOnApplyNotFound)
         {
             this.Register(aggregate);
@@ -37,7 +37,7 @@
             this.Register(typeof(T), @event => handler((T)@event));
         }
 
-        public void Register(IAggregate aggregate)
+        public void Register(AggregateRoot aggregate)
         {
             if (aggregate == null)
             {

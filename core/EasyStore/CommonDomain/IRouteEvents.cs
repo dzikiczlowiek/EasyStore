@@ -6,7 +6,7 @@
     {
         void Register<T>(Action<T> handler);
 
-        void Register(IAggregate aggregate);
+        void Register(AggregateRoot aggregate);
 
         void Dispatch(object eventMessage);
     }

@@ -19,10 +19,6 @@
             note.ChangeTitle("Terefere");
             note.ChangeTitle("JABADABADU");
 
-            foreach (var @event in (note as IAggregate).GetUncommittedEvents())
-            {
-                Debug.WriteLine(JsonConvert.SerializeObject(@event));
-            }
 
             var store = new EventStore(null);
             using (var stream = store.OpenStream("ST1"))
