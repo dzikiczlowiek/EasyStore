@@ -1,5 +1,7 @@
 ﻿namespace EasyStore.UnitTests.EventStore.Arrangement
 {
+    using System.Collections.Generic;
+
     using EasyStore.Persistence;
 
     using Moq;
@@ -16,6 +18,11 @@
         public void NoCommitsFor(string streamId, RevisionRange revision)
         {
             this._mock.Setup(x => x.GetFrom(streamId, revision.Min, revision.Max)).Returns(() => null);
+        }
+
+        public void RandomAllStoredCommitsForStream(string streamId, IEnumerable<ICommit> commits)
+        {
+            this._mock.Setup(x => x.GetFrom(streamId, int.MinValue, int.MaxValue)).Returns(() => commits);
         }
     }
 }

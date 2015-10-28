@@ -14,13 +14,15 @@
         ICollection<EventMessage> CommittedEvents { get; }
 
         ICollection<EventMessage> UncommittedEvents { get; }
-
-        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate;
-
+      
         void Add(EventMessage uncommittedEvent);
 
         void CommitChanges(Guid commitId);
 
         void ClearChanges();
+
+        TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate;
+
+        void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregate;
     }
 }

@@ -13,6 +13,8 @@
 
         private readonly ICollection<EventMessage> _uncommitedEvents = new LinkedList<EventMessage>();
 
+        private readonly ICollection<IAggregate> _aggregates = new LinkedList<IAggregate>(); 
+
         private readonly ICommitEvents _persistence;
 
         public EventStream(string streamId, ICommitEvents persistence)
@@ -24,8 +26,7 @@
         public EventStream(string streamId, int minRevision, int maxRevision, ICommitEvents persistence)
             : this(streamId, persistence)
         {
-            IEnumerable<ICommit> commits = persistence.GetFrom(streamId, minRevision, maxRevision);
-            this.PopulateStream(minRevision, maxRevision, commits);
+            throw new NotImplementedException();
         }
 
         public int CommitSequence { get; private set; }
@@ -78,15 +79,20 @@
         public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : class, IAggregate
         {
             var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
-
-            return default(TAggregate);
+            throw new NotImplementedException();
         }
 
-        private void PopulateStream(int minRevision, int maxRevision, IEnumerable<ICommit> commits)
+        public void AttachAggregate<TAggregate>(TAggregate aggregate)
+            where TAggregate : class, IAggregate
         {
-            foreach (var commit in commits ?? Enumerable.Empty<ICommit>())
+            this._aggregates.Add(aggregate);
+            foreach (var uncommittedEvent in aggregate.GetUncommittedEvents())
             {
-                this.CommitSequence = commit.CommitSequence;
+                var eventMessage = new EventMessage();
+                eventMessage.AggregateId = aggregate.Id;
+                eventMessage.Body = uncommittedEvent;
+                eventMessage.BodyType = uncommittedEvent.GetType().AssemblyQualifiedName;
+                this.Add(eventMessage);
             }
         }
     }

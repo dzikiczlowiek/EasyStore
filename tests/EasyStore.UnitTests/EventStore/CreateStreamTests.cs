@@ -1,6 +1,7 @@
 ﻿namespace EasyStore.UnitTests.EventStore
 {
     using EasyStore.Tests.Common;
+    using EasyStore.Tests.Common.Builders;
     using EasyStore.UnitTests.EventStore.Arrangement;
 
     using FluentAssertions;

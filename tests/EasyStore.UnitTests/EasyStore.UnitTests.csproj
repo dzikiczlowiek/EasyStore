@@ -69,13 +69,14 @@
   <ItemGroup>
     <Compile Include="Aggregate\AggregateTests.cs" />
     <Compile Include="EventStore\Arrangement\CreateStreamFixture.cs" />
-    <Compile Include="EventStore\Arrangement\EventStreamValuesGenerator.cs" />
-    <Compile Include="EventStore\Arrangement\OpenStreamFixture.cs" />
     <Compile Include="EventStore\Arrangement\PersistStreamStub.cs" />
     <Compile Include="EventStore\Arrangement\RevisionRange.cs" />
     <Compile Include="EventStore\CreateStreamTests.cs" />
-    <Compile Include="EventStore\OpenStreamTests.cs" />
-    <Compile Include="EventStream\EventStreamTests.cs" />
+    <Compile Include="EventStream\Arrangement\LoadAggregateFixture.cs" />
+    <Compile Include="EventStream\Arrangement\AttachAggregateFixture.cs" />
+    <Compile Include="EventStream\AttachAggregateTests.cs" />
+    <Compile Include="EventStream\LoadAggregateTests.cs" />
+    <Compile Include="EventStream\Arrangement\PersistStreamStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

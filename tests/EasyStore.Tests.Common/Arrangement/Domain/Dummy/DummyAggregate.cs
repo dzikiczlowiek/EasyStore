@@ -1,4 +1,4 @@
-﻿namespace EasyStore.Tests.Common.Arrangement
+﻿namespace EasyStore.Tests.Common.Arrangement.Domain.Dummy
 {
     using System;
 

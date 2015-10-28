@@ -3,6 +3,7 @@
     using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;
     using EasyStore.Tests.Common.Arrangement;
+    using EasyStore.Tests.Common.Arrangement.Domain.Dummy;
 
     using FluentAssertions;
 

@@ -7,8 +7,10 @@
     {
         Guid CommitId { get; }
 
-        IEnumerable<EventMessage> Events { get; }
+        ICollection<EventMessage> Events { get; }
 
         int CommitSequence { get; }
+
+        int StreamRevision { get; }
     }
 }

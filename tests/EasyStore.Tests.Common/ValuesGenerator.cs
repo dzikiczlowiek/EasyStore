@@ -52,5 +52,16 @@
             path = path.Replace(".", string.Empty);
             return path;
         }
+
+        public Func<int> SequenceFrom(int start, int stepBy = 1)
+        {
+            var from = start;
+            return () =>
+            {
+                var val = from;
+                from += stepBy;
+                return val;
+            };
+        }
     }
 }

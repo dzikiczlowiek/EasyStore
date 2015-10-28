@@ -1,4 +1,4 @@
-﻿namespace EasyStore.UnitTests.EventStore.Arrangement
+﻿namespace EasyStore.Tests.Common.Builders
 {
     using EasyStore.Tests.Common;
 
