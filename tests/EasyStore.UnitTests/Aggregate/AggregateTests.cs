@@ -2,8 +2,7 @@
 {
     using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;
-    using EasyStore.Tests.Common.Arrangement;
-    using EasyStore.Tests.Common.Arrangement.Domain.Dummy;
+    using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
 
     using FluentAssertions;
 
@@ -15,7 +14,7 @@
         public void applying_events_should_raise_aggregate_version()
         {
             var aggregateId = A.RandomGuid();
-            var aggregate = DummyAggregate.CreateNew(aggregateId);
+            var aggregate = PersonAggregate.CreateNew(aggregateId);
 
             aggregate.ChangeAge(A.RandomNumber());
             aggregate.ChangeName(A.RandomShortString());
@@ -27,7 +26,7 @@
         public void applying_events_should_return_this_events_with_method_GetUncommitedEvents()
         {
             var aggregateId = A.RandomGuid();
-            var aggregate = DummyAggregate.CreateNew(aggregateId);
+            var aggregate = PersonAggregate.CreateNew(aggregateId);
 
             aggregate.ChangeAge(A.RandomNumber());
             aggregate.ChangeName(A.RandomShortString());

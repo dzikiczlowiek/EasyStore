@@ -4,14 +4,8 @@
 
     using EasyStore.CommonDomain;
 
-    using EventStream = EasyStore.EventStream;
-
-    public class LoadAggregateFixture
+    public class LoadAggregateFixture : EventStreamFixtureBase
     {
-        private readonly PersistStreamStub _commitEventsStub = new PersistStreamStub();
-
-        public string StreamId { get; protected set; }
-
         public static LoadAggregateFixture Create()
         {
             var fixture = new LoadAggregateFixture();
@@ -23,12 +17,6 @@
         {
             var sut = this.CreateSut();
             return () => sut.LoadAggregate<T>(aggregateId);
-        }
-
-        private IEventStream CreateSut()
-        {
-            var stream = new EventStream(this.StreamId, this._commitEventsStub.Create());
-            return stream;
         }
     }
 }

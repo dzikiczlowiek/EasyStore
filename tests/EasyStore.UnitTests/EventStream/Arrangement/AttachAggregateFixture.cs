@@ -4,26 +4,12 @@
 
     using EasyStore.CommonDomain;
 
-    using EventStream = EasyStore.EventStream;
-
-    public class AttachAggregateFixture
+    public class AttachAggregateFixture : EventStreamFixtureBase
     {
-        private readonly PersistStreamStub _persistenceStub = new PersistStreamStub();
-
-        public string StreamId { get; protected set; }
-
-        public IEventStream Stream { get; protected set; }
-
-        public Action AttacheAggregate(AggregateRoot aggregate)
+        public Action AttachAggregate(AggregateRoot aggregate)
         {
-            this.Stream = this.CreateSut();
-            return () => this.Stream.AttachAggregate(aggregate);
-        }
-
-        private IEventStream CreateSut()
-        {
-            var stream = new EventStream(this.StreamId, this._persistenceStub.Create());
-            return stream;
+            var sut = this.CreateSut();
+            return () => sut.AttachAggregate(aggregate);
         }
     }
 }

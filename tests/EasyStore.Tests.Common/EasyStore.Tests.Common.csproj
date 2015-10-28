@@ -42,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arrangement\Domain\Dummy\DummyAggregate.cs" />
-    <Compile Include="Arrangement\Domain\Dummy\DummyChangedAgeEvent.cs" />
-    <Compile Include="Arrangement\Domain\Dummy\DummyChangedNameEvent.cs" />
+    <Compile Include="Arrangement\DummyDomain\Person\PersonAggregate.cs" />
+    <Compile Include="Arrangement\DummyDomain\Person\ChangedAgeEvent.cs" />
+    <Compile Include="Arrangement\DummyDomain\Person\ChangedNameEvent.cs" />
+    <Compile Include="Arrangement\DummyDomain\Product\ChangedPriceEvent.cs" />
+    <Compile Include="Arrangement\DummyDomain\Product\ProductAggregate.cs" />
+    <Compile Include="Arrangement\DummyDomain\Product\ChangedCategoryEvent.cs" />
+    <Compile Include="Arrangement\DummyDomain\Product\ChangedNameEvent.cs" />
     <Compile Include="Builders\CommitBuilderExtensions.cs" />
     <Compile Include="Builders\EventMessageBuilder.cs" />
     <Compile Include="Builders\EventStreamValuesGenerator.cs" />
@@ -63,6 +67,7 @@
       <Name>EasyStore</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

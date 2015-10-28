@@ -4,7 +4,7 @@
 
     using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;
-    using EasyStore.Tests.Common.Arrangement.Domain.Dummy;
+    using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
     using EasyStore.UnitTests.EventStream.Arrangement;
 
     using FluentAssertions;
@@ -18,7 +18,7 @@
         {
             var fixture = new AttachAggregateFixture();
 
-            var dummyAggregate = DummyAggregate.CreateNew(A.RandomGuid());
+            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
             dummyAggregate.ChangeAge(A.RandomNumber());
             dummyAggregate.ChangeName(A.RandomShortString());
 
@@ -40,7 +40,7 @@
         {
             var fixture = new AttachAggregateFixture();
 
-            var dummyAggregate = DummyAggregate.CreateNew(A.RandomGuid());
+            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
 
             var act = fixture.AttachAggregate(dummyAggregate);
             act();
@@ -65,7 +65,7 @@
         {
             var fixture = new AttachAggregateFixture();
            
-            var dummyAggregate = DummyAggregate.CreateNew(A.RandomGuid());
+            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
             dummyAggregate.ChangeName(A.RandomShortString());
 
             var act = fixture.AttachAggregate(dummyAggregate);
