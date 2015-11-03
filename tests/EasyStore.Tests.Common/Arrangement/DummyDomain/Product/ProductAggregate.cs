@@ -3,7 +3,6 @@
     using System;
 
     using EasyStore.CommonDomain;
-    using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
 
     public class ProductAggregate : AggregateRoot
     {
@@ -12,16 +11,16 @@
         {
         }
 
-        public ProductAggregate(Guid aggregateId, IRouteEvents eventRouter)
-            : base(aggregateId, eventRouter)
-        {
-        }
-
         public string Name { get; private set; }
 
         public decimal Price { get; private set; }
 
         public string Category { get; private set; }
+
+        public static ProductAggregate CreateNew(Guid aggregateId)
+        {
+            return new ProductAggregate(aggregateId);
+        }
 
         public void ChangeName(string name)
         {
@@ -43,9 +42,9 @@
             this.Name = @event.Name;
         }
 
-        private void Apply(ChangedAgeEvent @event)
+        private void Apply(ChangedPriceEvent @event)
         {
-            this.Price = @event.Age;
+            this.Price = @event.Price;
         }
 
         private void Apply(ChangedCategoryEvent @event)

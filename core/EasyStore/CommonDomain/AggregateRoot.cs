@@ -18,16 +18,8 @@
 
         protected AggregateRoot(Guid aggregateId, IRouteEvents eventRouter)
         {
-            this.Id = aggregateId;
-            if (eventRouter == null)
-            {
-                this._eventRouter = new EventRouter(true, this);
-            }
-            else
-            {
-                this._eventRouter = eventRouter;
-                this._eventRouter.Register(this);
-            }
+            this.ResolveRouter(eventRouter);
+            this.RaiseEvent(new CreatedEvent(aggregateId));
         }
 
         public int Version { get; private set; }
@@ -60,6 +52,11 @@
             return this.Id.GetHashCode();
         }
 
+        protected virtual void Apply(CreatedEvent @event)
+        {
+            this.Id = @event.AggregateId;
+        }
+
         void IAggregate.ApplyEvent(IDomainEvent eventData)
         {
             this.RegisteredRoutes.Dispatch(eventData);
@@ -88,6 +85,19 @@
             if (this._stream != null)
             {
                 this._stream.ForwardEvent(this.Id, @event);
+            }
+        }
+
+        private void ResolveRouter(IRouteEvents eventRouter)
+        {
+            if (eventRouter == null)
+            {
+                this._eventRouter = new EventRouter(true, this);
+            }
+            else
+            {
+                this._eventRouter = eventRouter;
+                this._eventRouter.Register(this);
             }
         }
     }

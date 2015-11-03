@@ -20,14 +20,16 @@
             return new PersonAggregate(aggregateId);
         }
 
-        public void ChangeName(string name)
+        public PersonAggregate ChangeName(string name)
         {
             this.RaiseEvent(new ChangedNameEvent(name));
+            return this;
         }
 
-        public void ChangeAge(int age)
+        public PersonAggregate ChangeAge(int age)
         {
             this.RaiseEvent(new ChangedAgeEvent(age));
+            return this;
         }
 
         private void Apply(ChangedNameEvent @event)

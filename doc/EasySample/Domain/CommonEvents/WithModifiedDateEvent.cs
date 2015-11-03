@@ -9,7 +9,7 @@
     {
         protected WithModifiedDateEvent()
         {
-            this.ModifiedDate = CoreTime.Now;
+            this.ModifiedDate = CoreTime.UtcNow;
         }
 
         public DateTime ModifiedDate { get; protected set; }

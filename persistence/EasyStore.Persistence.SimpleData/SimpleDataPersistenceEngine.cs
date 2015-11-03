@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using EasyStore.CommonDomain;
     using Serialization;
     using Simple.Data;
 

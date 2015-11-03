@@ -1,5 +1,7 @@
 ﻿namespace EasyStore.UnitTests.Aggregate
 {
+    using System.Linq;
+
     using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;
     using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
@@ -11,27 +13,15 @@
     public class AggregateTests : TestBase
     {
         [Fact]
-        public void applying_events_should_raise_aggregate_version()
+        public void newly_created_aggregate_should_have_one_uncommited_event_with_its_id()
         {
             var aggregateId = A.RandomGuid();
-            var aggregate = PersonAggregate.CreateNew(aggregateId);
-
-            aggregate.ChangeAge(A.RandomNumber());
-            aggregate.ChangeName(A.RandomShortString());
-
-            aggregate.Version.Should().Be(2);
-        }
-
-        [Fact]
-        public void applying_events_should_return_this_events_with_method_GetUncommitedEvents()
-        {
-            var aggregateId = A.RandomGuid();
-            var aggregate = PersonAggregate.CreateNew(aggregateId);
-
-            aggregate.ChangeAge(A.RandomNumber());
-            aggregate.ChangeName(A.RandomShortString());
-
-            (aggregate as IAggregate).GetUncommittedEvents().Count.Should().Be(2);
+            var personAggregate = PersonAggregate.CreateNew(aggregateId);
+            
+            var events = personAggregate.GetUncommittedEvents();
+            events.Should().HaveCount(1);
+            var createEvent = events.Single() as CreatedEvent;
+            createEvent.AggregateId.Should().Be(aggregateId);
         }
     }
 }

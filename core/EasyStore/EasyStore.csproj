@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDomain\AggregateRoot.cs" />
+    <Compile Include="CommonDomain\CreatedEvent.cs" />
     <Compile Include="CommonDomain\Entity.cs" />
     <Compile Include="CommonDomain\EventRouter.cs" />
     <Compile Include="CommonDomain\IAggregate.cs" />

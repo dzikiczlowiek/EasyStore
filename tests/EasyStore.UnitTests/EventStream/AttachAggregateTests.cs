@@ -1,13 +1,9 @@
 ﻿namespace EasyStore.UnitTests.EventStream
 {
-    using System.Linq;
-
-    using EasyStore.CommonDomain;
     using EasyStore.Tests.Common;
     using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
+    using EasyStore.Tests.Common.Arrangement.DummyDomain.Product;
     using EasyStore.UnitTests.EventStream.Arrangement;
-
-    using FluentAssertions;
 
     using Xunit;
 
@@ -16,72 +12,89 @@
         [Fact]
         public void attached_aggregate_with_already_two_events_should_add_those_events_to_stream_events()
         {
-            var fixture = new AttachAggregateFixture();
+            var fixture = AttachAggregateFixture.Create();
 
-            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
-            dummyAggregate.ChangeAge(A.RandomNumber());
-            dummyAggregate.ChangeName(A.RandomShortString());
+            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            personAggregate.ChangeAge(A.RandomNumber());
+            personAggregate.ChangeName(A.RandomShortString());
 
-            var act = fixture.AttachAggregate(dummyAggregate);
+            var act = fixture.AttachAggregatesToStream(personAggregate);
             act();
 
-            var aggregateEvents = ((IAggregate)dummyAggregate).GetUncommittedEvents();
-            fixture.Stream.UncommittedEvents.Where(x => x.AggregateId == dummyAggregate.Id)
-                .Should()
-                .HaveCount(aggregateEvents.Count);
-            foreach (var aggregateEvent in aggregateEvents)
-            {
-                fixture.Stream.UncommittedEvents.Any(x => x.Body == aggregateEvent).Should().BeTrue();
-            }
+            fixture.stream_should_have_all_events_for_aggregate(personAggregate);
         }
 
         [Fact]
         public void adding_events_to_attached_aggregate_should_add_events_to_his_stream()
         {
-            var fixture = new AttachAggregateFixture();
+            var fixture = AttachAggregateFixture.Create();
 
-            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
 
-            var act = fixture.AttachAggregate(dummyAggregate);
+            var act = fixture.AttachAggregatesToStream(personAggregate);
             act();
 
-            dummyAggregate.ChangeAge(A.RandomNumber());
-            dummyAggregate.ChangeName(A.RandomShortString());
+            personAggregate.ChangeAge(A.RandomNumber());
+            personAggregate.ChangeName(A.RandomShortString());
 
-            var aggregateEvents = ((IAggregate)dummyAggregate).GetUncommittedEvents();
-            fixture.Stream.UncommittedEvents.Where(x => x.AggregateId == dummyAggregate.Id)
-                .Should()
-                .HaveCount(aggregateEvents.Count);
-            foreach (var aggregateEvent in aggregateEvents)
-            {
-                fixture.Stream.UncommittedEvents.Any(x => x.Body == aggregateEvent).Should().BeTrue();
-            }
+            fixture.stream_should_have_all_events_for_aggregate(personAggregate);
         }
 
         [Fact]
         public void
-            aggregate_with_some_events_attached_to_stream_ans_then_added_some_events_should_have_all_these_events_in_stream
+            aggregate_with_some_events_attached_to_stream_and_then_added_some_events_should_have_all_these_events_in_stream
             ()
         {
-            var fixture = new AttachAggregateFixture();
-           
-            var dummyAggregate = PersonAggregate.CreateNew(A.RandomGuid());
-            dummyAggregate.ChangeName(A.RandomShortString());
+            var fixture = AttachAggregateFixture.Create();
 
-            var act = fixture.AttachAggregate(dummyAggregate);
+            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            personAggregate.ChangeName(A.RandomShortString());
+
+            var act = fixture.AttachAggregatesToStream(personAggregate);
+            act();
+            personAggregate.ChangeAge(A.RandomNumber());
+           
+            fixture.stream_should_have_all_events_for_aggregate(personAggregate);
+        }
+
+        [Fact]
+        public void attaching_to_stream_few_aggregates_with_events_should_add_those_events_to_stream()
+        {
+            var fixture = AttachAggregateFixture.Create();
+
+            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            personAggregate.ChangeName(A.RandomShortString());
+            
+            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            productAggregate.ChangePrice(A.RandomNumber());
+            productAggregate.ChangeName(A.RandomShortString());
+
+            var act = fixture.AttachAggregatesToStream(personAggregate, productAggregate);
             act();
 
-            dummyAggregate.ChangeAge(A.RandomNumber());
+            fixture.stream_should_have_all_events_for_aggregate(personAggregate);
+            fixture.stream_should_have_all_events_for_aggregate(productAggregate);
+        }
 
-            var aggregateEvents = ((IAggregate)dummyAggregate).GetUncommittedEvents();
-            fixture.Stream.UncommittedEvents.Where(x => x.AggregateId == dummyAggregate.Id)
-                .Should()
-                .HaveCount(2);
+        [Fact]
+        public void stream_should_track_events_of_multiple_attached_aggregates()
+        {
+            var fixture = AttachAggregateFixture.Create();
 
-            foreach (var aggregateEvent in aggregateEvents)
-            {
-                fixture.Stream.UncommittedEvents.Any(x => x.Body == aggregateEvent).Should().BeTrue();
-            }
+            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            personAggregate.ChangeName(A.RandomShortString());
+
+            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            productAggregate.ChangePrice(A.RandomNumber());
+            productAggregate.ChangeName(A.RandomShortString());
+
+            var act = fixture.AttachAggregatesToStream(personAggregate, productAggregate);
+            act();
+            personAggregate.ChangeAge(A.RandomNumber());
+            productAggregate.ChangeCategory(A.RandomShortString());
+
+            fixture.stream_should_have_all_events_for_aggregate(personAggregate);
+            fixture.stream_should_have_all_events_for_aggregate(productAggregate);
         }
     }
 }
