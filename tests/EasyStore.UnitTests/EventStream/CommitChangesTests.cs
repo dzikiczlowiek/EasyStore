@@ -1,7 +1,5 @@
 ﻿namespace EasyStore.UnitTests.EventStream
 {
-    using System.Linq;
-
     using EasyStore.Tests.Common;
     using EasyStore.Tests.Common.Arrangement.DummyDomain.Person;
     using EasyStore.Tests.Common.Arrangement.DummyDomain.Product;
