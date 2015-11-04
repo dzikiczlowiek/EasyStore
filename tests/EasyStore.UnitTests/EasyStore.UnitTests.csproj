@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregate\AggregateTests.cs" />
+    <Compile Include="Aggregate\DefaultAggregatorConstructorTests.cs" />
     <Compile Include="EventStore\Arrangement\CreateStreamFixture.cs" />
     <Compile Include="EventStore\Arrangement\PersistStreamStub.cs" />
     <Compile Include="EventStore\Arrangement\RevisionRange.cs" />

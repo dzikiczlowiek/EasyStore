@@ -16,8 +16,8 @@
             var streamId = A.RandomStreamId();
             
             var fixture = CommitChangesFixture.Create().WithStreamId(streamId);
-            var personAggreagte = PersonAggregate.CreateNew(A.RandomGuid());
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var personAggreagte = Person.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
 
             var commitId = A.RandomGuid();
 
@@ -35,8 +35,8 @@
             var streamId = A.RandomStreamId();
 
             var fixture = CommitChangesFixture.Create().WithStreamId(streamId);
-            var personAggreagte = PersonAggregate.CreateNew(A.RandomGuid());
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var personAggreagte = Person.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
 
             var commitId = A.RandomGuid();
 
@@ -54,8 +54,8 @@
             var streamId = A.RandomStreamId();
 
             var fixture = CommitChangesFixture.Create().WithStreamId(streamId);
-            var personAggreagte = PersonAggregate.CreateNew(A.RandomGuid());
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var personAggreagte = Person.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
 
             var commitId = A.RandomGuid();
 
@@ -73,8 +73,8 @@
             var streamId = A.RandomStreamId();
 
             var fixture = CommitChangesFixture.Create().WithStreamId(streamId);
-            var personAggreagte = PersonAggregate.CreateNew(A.RandomGuid());
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var personAggreagte = Person.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
 
             var commitId = A.RandomGuid();
 

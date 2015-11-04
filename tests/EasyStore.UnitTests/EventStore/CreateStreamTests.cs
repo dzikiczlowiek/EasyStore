@@ -21,7 +21,6 @@
 
             fixture.CreatedEventStream.StreamId.Should().Be(streamId);
             fixture.CreatedEventStream.UncommittedEvents.Should().BeEmpty();
-            fixture.CreatedEventStream.CommittedEvents.Should().BeEmpty();
             fixture.CreatedEventStream.CommitSequence.Should().Be(0);
         }
     }

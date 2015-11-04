@@ -14,7 +14,7 @@
         {
             var fixture = AttachAggregateFixture.Create();
 
-            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = Person.CreateNew(A.RandomGuid());
             personAggregate.ChangeAge(A.RandomNumber());
             personAggregate.ChangeName(A.RandomShortString());
 
@@ -29,7 +29,7 @@
         {
             var fixture = AttachAggregateFixture.Create();
 
-            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = Person.CreateNew(A.RandomGuid());
 
             var act = fixture.AttachAggregatesToStream(personAggregate);
             act();
@@ -47,7 +47,7 @@
         {
             var fixture = AttachAggregateFixture.Create();
 
-            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = Person.CreateNew(A.RandomGuid());
             personAggregate.ChangeName(A.RandomShortString());
 
             var act = fixture.AttachAggregatesToStream(personAggregate);
@@ -62,10 +62,10 @@
         {
             var fixture = AttachAggregateFixture.Create();
 
-            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = Person.CreateNew(A.RandomGuid());
             personAggregate.ChangeName(A.RandomShortString());
             
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
             productAggregate.ChangePrice(A.RandomNumber());
             productAggregate.ChangeName(A.RandomShortString());
 
@@ -81,10 +81,10 @@
         {
             var fixture = AttachAggregateFixture.Create();
 
-            var personAggregate = PersonAggregate.CreateNew(A.RandomGuid());
+            var personAggregate = Person.CreateNew(A.RandomGuid());
             personAggregate.ChangeName(A.RandomShortString());
 
-            var productAggregate = ProductAggregate.CreateNew(A.RandomGuid());
+            var productAggregate = Product.CreateNew(A.RandomGuid());
             productAggregate.ChangePrice(A.RandomNumber());
             productAggregate.ChangeName(A.RandomShortString());
 

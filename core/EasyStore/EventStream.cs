@@ -10,8 +10,6 @@
 
     public class EventStream : IEventStream
     {
-        private readonly ICollection<EventMessage> _commitedEvents = new LinkedList<EventMessage>();
-
         private readonly ICollection<EventMessage> _uncommitedEvents = new LinkedList<EventMessage>();
 
         private readonly ICollection<IAggregate> _aggregates = new LinkedList<IAggregate>(); 
@@ -33,14 +31,6 @@
         public int CommitSequence { get; private set; }
 
         public string StreamId { get; private set; }
-
-        public ICollection<EventMessage> CommittedEvents
-        {
-            get
-            {
-                return new List<EventMessage>(this._commitedEvents);
-            }
-        }
 
         public ICollection<EventMessage> UncommittedEvents
         {
@@ -96,10 +86,7 @@
 
         void IEventStream.ForwardEvent(Guid aggregateId, IDomainEvent @event)
         {
-            var eventMessage = new EventMessage();
-            eventMessage.AggregateId = aggregateId;
-            eventMessage.Body = @event;
-            eventMessage.BodyType = @event.GetType().AssemblyQualifiedName;
+            var eventMessage = new EventMessage(aggregateId, @event);
             this.Add(eventMessage);
         }
     }

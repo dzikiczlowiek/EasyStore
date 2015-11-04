@@ -4,9 +4,9 @@
 
     using EasyStore.CommonDomain;
 
-    public class PersonAggregate : AggregateRoot
+    public class Person : AggregateRoot
     {
-        private PersonAggregate(Guid aggregateId)
+        private Person(Guid aggregateId)
             : base(aggregateId)
         {
         }
@@ -15,18 +15,18 @@
 
         public int Age { get; private set; }
 
-        public static PersonAggregate CreateNew(Guid aggregateId)
+        public static Person CreateNew(Guid aggregateId)
         {
-            return new PersonAggregate(aggregateId);
+            return new Person(aggregateId);
         }
 
-        public PersonAggregate ChangeName(string name)
+        public Person ChangeName(string name)
         {
             this.RaiseEvent(new ChangedNameEvent(name));
             return this;
         }
 
-        public PersonAggregate ChangeAge(int age)
+        public Person ChangeAge(int age)
         {
             this.RaiseEvent(new ChangedAgeEvent(age));
             return this;

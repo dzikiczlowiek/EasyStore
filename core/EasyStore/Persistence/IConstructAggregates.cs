@@ -6,8 +6,8 @@
 
     public interface IConstructAggregates
     {
-        AggregateRoot Build(Type type, Guid aggregateId);
+        AggregateRoot Build(Type type);
 
-        TAggregate Build<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot;
+        TAggregate Build<TAggregate>() where TAggregate : AggregateRoot;
     }
 }

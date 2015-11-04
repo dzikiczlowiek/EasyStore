@@ -11,8 +11,6 @@
 
         int CommitSequence { get; }
 
-        ICollection<EventMessage> CommittedEvents { get; }
-
         ICollection<EventMessage> UncommittedEvents { get; }
       
         void Add(EventMessage uncommittedEvent);

@@ -31,7 +31,7 @@
             }
             else
             {
-                aggregate = this._aggregatorConstructor.Build<TAggregate>(aggregateId);
+                aggregate = this._aggregatorConstructor.Build<TAggregate>();
             }
 
             return aggregate;

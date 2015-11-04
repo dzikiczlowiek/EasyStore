@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using EasyStore.CommonDomain;
+
     using Serialization;
     using Simple.Data;
 
@@ -32,9 +34,8 @@
             {
                 Type type = Type.GetType(rawEvent.Type);
                 var data = (byte[])rawEvent.Data;
-                var eventMessage = new EventMessage();
-                eventMessage.Body = this._serializer.Deserialize(type, data);
-                eventMessage.BodyType = type.AssemblyQualifiedName;
+                IDomainEvent @event = this._serializer.Deserialize(type, data) as IDomainEvent;
+                var eventMessage = new EventMessage(aggregateId, @event);
                 events.Add(eventMessage);
             }
 
@@ -51,9 +52,8 @@
             {
                 Type type = Type.GetType(rawEvent.Type);
                 var data = (byte[])rawEvent.Data;
-                var eventMessage = new EventMessage();
-                eventMessage.Body = this._serializer.Deserialize(type, data);
-                eventMessage.BodyType = type.AssemblyQualifiedName;
+                IDomainEvent @event = this._serializer.Deserialize(type, data) as IDomainEvent;
+                var eventMessage = new EventMessage(aggregateId, @event);
                 events.Add(eventMessage);
             }
 

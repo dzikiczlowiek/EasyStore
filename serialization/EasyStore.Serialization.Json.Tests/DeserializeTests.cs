@@ -13,14 +13,14 @@
         public void should_serialize_deserialize_aggregate_root_from_stream()
         {
             var id = A.RandomGuid();
-            var aggregate = PersonAggregate.CreateNew(id);
+            var aggregate = Person.CreateNew(id);
             aggregate.ChangeAge(29);
             aggregate.ChangeName("John Snow");
             var serializer = new JsonPayloadSerializer();
 
             var bytes = serializer.Serialize(aggregate);
 
-            var deserializedPayload = serializer.Deserialize<PersonAggregate>(bytes);
+            var deserializedPayload = serializer.Deserialize<Person>(bytes);
 
             deserializedPayload.Age.Should().Be(aggregate.Age);
             deserializedPayload.Name.Should().Be(aggregate.Name);

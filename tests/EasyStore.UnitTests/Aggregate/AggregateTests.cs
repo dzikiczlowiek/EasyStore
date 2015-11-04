@@ -16,7 +16,7 @@
         public void newly_created_aggregate_should_have_one_uncommited_event_with_its_id()
         {
             var aggregateId = A.RandomGuid();
-            var personAggregate = PersonAggregate.CreateNew(aggregateId);
+            var personAggregate = Person.CreateNew(aggregateId);
             
             var events = personAggregate.GetUncommittedEvents();
             events.Should().HaveCount(1);

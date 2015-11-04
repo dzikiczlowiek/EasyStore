@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyObjectBuilder", "..\Eas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyObjectBuilder.Tests", "..\EasyObjectBuilder\EasyObjectBuilder.Tests\EasyObjectBuilder.Tests.csproj", "{CD241EAE-0AF1-4C4C-98C8-E3DEEC2B6860}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyStore.Persistence.SimpleData.UnitTests", "persistence\EasyStore.Persistence.SimpleData.UnitTests\EasyStore.Persistence.SimpleData.UnitTests.csproj", "{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{CD241EAE-0AF1-4C4C-98C8-E3DEEC2B6860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD241EAE-0AF1-4C4C-98C8-E3DEEC2B6860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD241EAE-0AF1-4C4C-98C8-E3DEEC2B6860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +95,6 @@ Global
 		{7B1E9973-B96A-48C7-A9D6-75D752B7A63F} = {20218905-FA4C-42E5-8BF3-F59BAD1A0526}
 		{C296DCEF-87BF-477C-977A-F90522A5F5CF} = {FC88AD4A-D5BD-40C4-B7CE-25AB64BA8F4E}
 		{CD241EAE-0AF1-4C4C-98C8-E3DEEC2B6860} = {FC88AD4A-D5BD-40C4-B7CE-25AB64BA8F4E}
+		{8F3F18CB-6D2F-412E-B3E8-1615CB42B4A1} = {93C82AD6-38F3-46AB-8559-1E67AE0C7B60}
 	EndGlobalSection
 EndGlobal

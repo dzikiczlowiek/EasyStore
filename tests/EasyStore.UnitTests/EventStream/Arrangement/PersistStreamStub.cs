@@ -1,12 +1,19 @@
 ﻿namespace EasyStore.UnitTests.EventStream.Arrangement
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+
+    using EasyStore.CommonDomain;
+    using EasyStore.Tests.Common;
 
     using Moq;
 
     public class PersistStreamStub
     {
         private readonly Mock<ICommitEvents> _mock = new Mock<ICommitEvents>();
+
+        private readonly ICollection<EventMessage> _eventMessages = new List<EventMessage>();
 
         public PersistStreamStub()
         {
@@ -17,10 +24,25 @@
 
         public ICommitEvents Create()
         {
+            this.MockGetAggregateEvents();
             this.MonitorCommits();
             return this._mock.Object;
         }
 
+        public void AddAggregate(AggregateRoot aggregate)
+        {
+            foreach (var domainEvent in aggregate.GetUncommittedEvents())
+            {
+                var @event = new EventMessage(aggregate.Id, domainEvent);
+                this._eventMessages.Add(@event);
+            }
+        }
+
+        private void MockGetAggregateEvents()
+        {
+            this._mock.Setup(x => x.GetAggregateEvents(It.IsAny<Guid>()))
+                .Returns<Guid>(aggregateId => this._eventMessages.Where(x => x.AggregateId == aggregateId));
+        }
 
         private void MonitorCommits()
         {

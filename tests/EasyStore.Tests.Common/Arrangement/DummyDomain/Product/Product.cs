@@ -4,9 +4,9 @@
 
     using EasyStore.CommonDomain;
 
-    public class ProductAggregate : AggregateRoot
+    public class Product : AggregateRoot
     {
-        public ProductAggregate(Guid aggregateId)
+        public Product(Guid aggregateId)
             : base(aggregateId)
         {
         }
@@ -17,9 +17,9 @@
 
         public string Category { get; private set; }
 
-        public static ProductAggregate CreateNew(Guid aggregateId)
+        public static Product CreateNew(Guid aggregateId)
         {
-            return new ProductAggregate(aggregateId);
+            return new Product(aggregateId);
         }
 
         public void ChangeName(string name)
