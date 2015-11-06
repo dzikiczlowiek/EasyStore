@@ -10,9 +10,9 @@
         public AggregateRoot Build(Type type)
         {
             var constructor = type.GetConstructor(
-               BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(IRouteEvents) }, null);
+               BindingFlags.NonPublic | BindingFlags.Instance, null, new Type[] { }, null);
 
-            return constructor.Invoke(new object[] { null }) as AggregateRoot;
+            return constructor.Invoke(null) as AggregateRoot;
         }
 
         public TAggregate Build<TAggregate>()

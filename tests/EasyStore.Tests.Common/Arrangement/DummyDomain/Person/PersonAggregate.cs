@@ -6,6 +6,11 @@
 
     public class Person : AggregateRoot
     {
+        private Person()
+            : base(null)
+        {
+        }
+
         private Person(Guid aggregateId)
             : base(aggregateId)
         {

@@ -6,8 +6,8 @@
 
     public class Order : AggregateRoot
     {
-        private Order(IRouteEvents eventRouter)
-            : base(eventRouter)
+        private Order()
+            : base(null)
         {
         }
 

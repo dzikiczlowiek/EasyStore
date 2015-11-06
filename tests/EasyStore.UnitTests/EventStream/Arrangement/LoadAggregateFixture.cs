@@ -6,6 +6,8 @@
 
     public class LoadAggregateFixture : EventStreamFixtureBase
     {
+        public AggregateRoot Aggregate { get; private set; }
+
         public static LoadAggregateFixture Create()
         {
             var fixture = new LoadAggregateFixture();
@@ -21,7 +23,7 @@
             where T : AggregateRoot
         {
             var sut = this.CreateSut();
-            return () => sut.LoadAggregate<T>(aggregateId);
+            return () => this.Aggregate = sut.LoadAggregate<T>(aggregateId);
         }
     }
 }

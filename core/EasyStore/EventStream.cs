@@ -16,7 +16,16 @@
 
         private readonly ICommitEvents _persistence;
 
+        private IConstructAggregates _aggregateConstructor;
+
+        protected EventStream(ICommitEvents persistence, IConstructAggregates aggregateConstructor)
+        {
+            this._persistence = persistence;
+            this.ResolveAggregateConstructor(aggregateConstructor);
+        }
+
         public EventStream(string streamId, ICommitEvents persistence)
+            : this(persistence, null)
         {
             this.StreamId = streamId;
             this._persistence = persistence;
@@ -70,7 +79,14 @@
         public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot
         {
             var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
-            throw new NotImplementedException();
+            TAggregate aggregate = this._aggregateConstructor.Build<TAggregate>();
+
+            foreach (var persistedEvent in persistedEvents)
+            {
+                (aggregate as IAggregate).ApplyEvent((IDomainEvent)persistedEvent.Body);
+            }
+
+            return aggregate;
         }
 
         public void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : AggregateRoot
@@ -88,6 +104,18 @@
         {
             var eventMessage = new EventMessage(aggregateId, @event);
             this.Add(eventMessage);
+        }
+
+        private void ResolveAggregateConstructor(IConstructAggregates aggregateConstructor)
+        {
+            if (aggregateConstructor != null)
+            {
+                this._aggregateConstructor = aggregateConstructor;
+            }
+            else
+            {
+                this._aggregateConstructor = new DefaultAggregateConstructor();
+            }
         }
     }
 }
