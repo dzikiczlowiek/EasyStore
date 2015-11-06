@@ -64,14 +64,14 @@
     <Compile Include="IEventStream.cs" />
     <Compile Include="Infrastructure\CoreTime.cs" />
     <Compile Include="Infrastructure\Guard.cs" />
+    <Compile Include="Infrastructure\InstanceCreationHelpers.cs" />
     <Compile Include="ISerialize.cs" />
     <Compile Include="IStoreEvents.cs" />
     <Compile Include="CommitAttempt.cs" />
-    <Compile Include="Persistence\AggregateLoader.cs" />
     <Compile Include="Persistence\Commit.cs" />
-    <Compile Include="Persistence\DefaultAggregatorConstructor.cs" />
+    <Compile Include="DefaultAggregateConstructor.cs" />
     <Compile Include="Persistence\IAccessSnapshots.cs" />
-    <Compile Include="Persistence\IConstructAggregates.cs" />
+    <Compile Include="IConstructAggregates.cs" />
     <Compile Include="Persistence\ILoadAggregates.cs" />
     <Compile Include="Persistence\IPersistStreams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

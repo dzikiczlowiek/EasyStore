@@ -6,6 +6,11 @@
 
     public class Order : AggregateRoot
     {
+        private Order(IRouteEvents eventRouter)
+            : base(eventRouter)
+        {
+        }
+
         public Order(Guid aggregateId, int orderNumber)
             : base(aggregateId)
         {

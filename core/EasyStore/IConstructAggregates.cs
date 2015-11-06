@@ -1,4 +1,4 @@
-﻿namespace EasyStore.Persistence
+﻿namespace EasyStore
 {
     using System;
 

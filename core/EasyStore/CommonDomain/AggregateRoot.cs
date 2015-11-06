@@ -11,9 +11,15 @@
 
         private IEventStream _stream;
 
-        protected AggregateRoot(Guid aggregateId)
-            : this(aggregateId, null)
+        protected AggregateRoot(IRouteEvents eventRouter)
         {
+            this.ResolveRouter(eventRouter);
+        }
+
+        protected AggregateRoot(Guid aggregateId)
+            : this(null)
+        {
+            this.RaiseEvent(new CreatedEvent(aggregateId));
         }
 
         protected AggregateRoot(Guid aggregateId, IRouteEvents eventRouter)

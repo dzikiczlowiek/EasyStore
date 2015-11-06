@@ -14,7 +14,7 @@
         [Fact]
         public void should_build_any_AggregateRoot_inherited_aggregate()
         {
-            var aggregateConstructor = new DefaultAggregatorConstructor();
+            var aggregateConstructor = new DefaultAggregateConstructor();
 
             var aggregate = aggregateConstructor.Build<Order>();
 
@@ -24,7 +24,7 @@
         [Fact]
         public void builded_aggregate_should_not_have_any_uncommitted_events()
         {
-            var aggregateConstructor = new DefaultAggregatorConstructor();
+            var aggregateConstructor = new DefaultAggregateConstructor();
 
             var aggregate = aggregateConstructor.Build<Order>();
 
@@ -34,11 +34,12 @@
         [Fact]
         public void builded_aggregate_should_have_any_event_router()
         {
-            var aggregateConstructor = new DefaultAggregatorConstructor();
+            var aggregateConstructor = new DefaultAggregateConstructor();
 
             var aggregate = aggregateConstructor.Build<Order>();
 
-            aggregate.GetPrivateFieldValue<Order, IRouteEvents>("_eventRouter");
+            var eventRouter = aggregate.GetPrivateFieldValue<AggregateRoot, IRouteEvents>("_eventRouter");
+            eventRouter.Should().NotBeNull();
         }
     }
 }

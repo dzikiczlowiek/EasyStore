@@ -1,20 +1,19 @@
-﻿namespace EasyStore.Persistence
+﻿namespace EasyStore
 {
     using System;
-    using System.Linq.Expressions;
     using System.Reflection;
-    using System.Runtime.Serialization;
 
     using EasyStore.CommonDomain;
 
-    public class DefaultAggregatorConstructor : IConstructAggregates
+    public class DefaultAggregateConstructor : IConstructAggregates
     {
         public AggregateRoot Build(Type type)
         {
-            // TODO: TOO SLOOOOOOOOW AND BAD!!!!!!!!!
-            return FormatterServices.GetUninitializedObject(type) as AggregateRoot;
-        }
+            var constructor = type.GetConstructor(
+               BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(IRouteEvents) }, null);
 
+            return constructor.Invoke(new object[] { null }) as AggregateRoot;
+        }
 
         public TAggregate Build<TAggregate>()
             where TAggregate : AggregateRoot
