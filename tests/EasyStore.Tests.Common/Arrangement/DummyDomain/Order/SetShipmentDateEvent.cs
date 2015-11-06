@@ -4,6 +4,7 @@
 
     using EasyStore.CommonDomain;
 
+    [Serializable]
     public class SetShipmentDateEvent : IDomainEvent
     {
         public SetShipmentDateEvent(DateTime shipmentDate)

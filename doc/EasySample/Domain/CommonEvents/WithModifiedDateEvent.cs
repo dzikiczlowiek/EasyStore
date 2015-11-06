@@ -5,6 +5,7 @@
     using EasyStore.CommonDomain;
     using EasyStore.Infrastructure;
 
+    [Serializable]
     public abstract class WithModifiedDateEvent : IDomainEvent
     {
         protected WithModifiedDateEvent()

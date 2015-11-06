@@ -1,7 +1,10 @@
 ﻿namespace EasyStore.Tests.Common.Arrangement.DummyDomain.Person
 {
-    using EasyStore.CommonDomain;
+    using System;
 
+    using EasyStore.CommonDomain;
+   
+    [Serializable]
     public class ChangedAgeEvent : IDomainEvent
     {
         public ChangedAgeEvent(int age)

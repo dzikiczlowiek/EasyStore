@@ -4,6 +4,7 @@
 
     using EasyStore.CommonDomain;
 
+    [Serializable]
     public abstract class CreatedAggregateEvent : IDomainEvent
     {
         protected CreatedAggregateEvent(Guid aggregateId)

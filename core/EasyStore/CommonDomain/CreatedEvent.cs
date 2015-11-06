@@ -2,6 +2,7 @@
 {
     using System;
 
+    [Serializable]
     public class CreatedEvent : IDomainEvent
     {
         public CreatedEvent(Guid aggregateId)
