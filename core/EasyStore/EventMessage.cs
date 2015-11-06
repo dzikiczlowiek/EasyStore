@@ -7,12 +7,15 @@
 
     public class EventMessage
     {
-        public EventMessage(Guid aggregateId, IDomainEvent @event)
+        public EventMessage(Guid aggregateId, int aggregateVersion, IDomainEvent @event)
         {
             this.AggregateId = aggregateId;
+            this.AggregateVersion = aggregateVersion;
             this.Body = @event;
             this.BodyType = @event.GetType().AssemblyQualifiedName;
         }
+
+        public int AggregateVersion { get; private set; }
 
         public Guid AggregateId { get; private set; }
 

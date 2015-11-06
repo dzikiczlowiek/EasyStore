@@ -5,7 +5,6 @@
     using System.Linq;
 
     using EasyStore.CommonDomain;
-    using EasyStore.Tests.Common;
 
     using FluentAssertions;
 

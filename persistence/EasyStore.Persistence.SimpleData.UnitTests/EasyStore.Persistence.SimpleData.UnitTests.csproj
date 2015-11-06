@@ -12,6 +12,7 @@
     <AssemblyName>EasyStore.Persistence.SimpleData.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>e287c177</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,10 @@
       <HintPath>..\..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +53,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.1.0\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
@@ -60,7 +69,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommitEvents\Arrangement\GetAggregateEventsFixture.cs" />
+    <Compile Include="Arrangement\CommitFixture.cs" />
+    <Compile Include="Arrangement\EventLogRecord.cs" />
+    <Compile Include="Arrangement\GetAggregateEventsFixture.cs" />
+    <Compile Include="Arrangement\PersistStreamsFixtureBase.cs" />
+    <Compile Include="CommitEvents\CommitTests.cs" />
     <Compile Include="CommitEvents\GetAggregateEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +81,10 @@
     <ProjectReference Include="..\..\..\EasyObjectBuilder\EasyObjectBuilder\EasyObjectBuilder.csproj">
       <Project>{c296dcef-87bf-477c-977a-f90522a5f5cf}</Project>
       <Name>EasyObjectBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\core\EasyStore\EasyStore.csproj">
+      <Project>{CE2C14EA-3883-401B-9078-019F2E100AA4}</Project>
+      <Name>EasyStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\tests\EasyStore.Tests.Common\EasyStore.Tests.Common.csproj">
       <Project>{0805a5bb-cbce-4871-9da3-9b15b21ebe02}</Project>

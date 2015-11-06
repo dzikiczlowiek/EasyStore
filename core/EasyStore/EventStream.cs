@@ -94,15 +94,15 @@
             this._aggregates.Add(aggregate);
             foreach (var uncommittedEvent in ((IAggregate)aggregate).GetUncommittedEvents())
             {
-                ((IEventStream)this).ForwardEvent(aggregate.Id, uncommittedEvent);
+                ((IEventStream)this).ForwardEvent(aggregate, uncommittedEvent);
             }
 
             ((IAggregate)aggregate).AttachToStream(this);
         }
 
-        void IEventStream.ForwardEvent(Guid aggregateId, IDomainEvent @event)
+        void IEventStream.ForwardEvent(AggregateRoot aggregate, IDomainEvent @event)
         {
-            var eventMessage = new EventMessage(aggregateId, @event);
+            var eventMessage = new EventMessage(aggregate.Id, aggregate.Version, @event);
             this.Add(eventMessage);
         }
 

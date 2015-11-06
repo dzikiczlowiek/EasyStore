@@ -33,7 +33,7 @@
         {
             foreach (var domainEvent in aggregate.GetUncommittedEvents())
             {
-                var @event = new EventMessage(aggregate.Id, domainEvent);
+                var @event = new EventMessage(aggregate.Id, aggregate.Version, domainEvent);
                 this._eventMessages.Add(@event);
             }
         }

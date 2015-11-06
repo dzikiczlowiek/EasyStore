@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using EasyStore.CommonDomain;
+    using EasyStore.Infrastructure;
 
     using Serialization;
     using Simple.Data;
@@ -35,7 +36,7 @@
                 Type type = Type.GetType(rawEvent.Type);
                 var data = (byte[])rawEvent.Data;
                 IDomainEvent @event = this._serializer.Deserialize(type, data) as IDomainEvent;
-                var eventMessage = new EventMessage(aggregateId, @event);
+                var eventMessage = new EventMessage(aggregateId, rawEvent.Version, @event);
                 events.Add(eventMessage);
             }
 
@@ -53,7 +54,7 @@
                 Type type = Type.GetType(rawEvent.Type);
                 var data = (byte[])rawEvent.Data;
                 IDomainEvent @event = this._serializer.Deserialize(type, data) as IDomainEvent;
-                var eventMessage = new EventMessage(aggregateId, @event);
+                var eventMessage = new EventMessage(aggregateId, rawEvent.Version, @event);
                 events.Add(eventMessage);
             }
 
@@ -72,7 +73,19 @@
 
         public ICommit Commit(CommitAttempt attempt)
         {
-            throw new System.NotImplementedException();
+            foreach (var eventMessage in attempt.Events)
+            {
+                this._db.EventsLog.Insert(
+                    AggregateId: eventMessage.AggregateId,
+                    Data: this._serializer.Serialize(eventMessage.Body),
+                    StreamId: attempt.StreamId,
+                    @Version: eventMessage.AggregateVersion,
+                    @Type: eventMessage.BodyType,
+                    CreatedAt: CoreTime.UtcNow,
+                    CommitId: attempt.CommitId);
+            }
+
+            return null;
         }
 
         public Snapshot GetSnapshotOfAggregate(Guid aggregateId)

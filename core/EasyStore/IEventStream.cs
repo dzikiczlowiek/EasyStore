@@ -23,6 +23,6 @@
 
         void AttachAggregate<TAggregate>(TAggregate aggregate) where TAggregate : AggregateRoot;
 
-        void ForwardEvent(Guid id, IDomainEvent @event);
+        void ForwardEvent(AggregateRoot aggregate, IDomainEvent @event);
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace EasyStore.Serialization.Json
 {
+    using System;
     using System.IO;
     using System.Text;
 
     using Newtonsoft.Json;
-using System;
 
     public class JsonPayloadSerializer : ISerialize
     {

@@ -6,10 +6,6 @@
 
     public class GetAggregateEvents : TestBase
     {
-        [Fact]
-        public void whatever()
-        {
-
-        }
+       
     }
 }

@@ -90,7 +90,7 @@
             this._uncommittedEvents.Add(@event);
             if (this._stream != null)
             {
-                this._stream.ForwardEvent(this.Id, @event);
+                this._stream.ForwardEvent(this, @event);
             }
         }
 
