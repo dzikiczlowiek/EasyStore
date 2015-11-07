@@ -22,19 +22,22 @@
             return new Product(aggregateId);
         }
 
-        public void ChangeName(string name)
+        public Product ChangeName(string name)
         {
             this.RaiseEvent(new ChangedNameEvent(name));
+            return this;
         }
 
-        public void ChangePrice(decimal price)
+        public Product ChangePrice(decimal price)
         {
             this.RaiseEvent(new ChangedPriceEvent(price));
+            return this;
         }
 
-        public void ChangeCategory(string category)
+        public Product ChangeCategory(string category)
         {
             this.RaiseEvent(new ChangedCategoryEvent(category));
+            return this;
         }
 
         private void Apply(ChangedNameEvent @event)
