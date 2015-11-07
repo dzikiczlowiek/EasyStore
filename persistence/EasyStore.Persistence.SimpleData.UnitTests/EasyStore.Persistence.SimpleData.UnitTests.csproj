@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arrangement\AggregateRecord.cs" />
     <Compile Include="Arrangement\CommitFixture.cs" />
     <Compile Include="Arrangement\EventLogRecord.cs" />
     <Compile Include="Arrangement\GetAggregateEventsFixture.cs" />

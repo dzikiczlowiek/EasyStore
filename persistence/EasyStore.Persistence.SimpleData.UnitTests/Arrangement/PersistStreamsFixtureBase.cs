@@ -29,13 +29,34 @@
                 record.EventType = eventLog.Type;
                 record.StreamId = eventLog.StreamId;
                 record.Version = eventLog.Version;
+                record.Sequence = eventLog.Sequence;
                 yield return record;
             }
+        }
+
+        public AggregateRecord GetAggregateRecord(Guid aggregateId)
+        {
+            var db = Database.Open();
+            var record = db.Aggregates.Get(aggregateId);
+            if (record == null)
+            {
+                return null;
+            }
+
+            var aggregateRecord = new AggregateRecord();
+            aggregateRecord.AggregateId = record.AggregateId;
+            aggregateRecord.Archived = record.Archived == 1;
+            aggregateRecord.CreatedAt = record.CreatedAt;
+            aggregateRecord.Type = record.@Type;
+            aggregateRecord.Version = record.Version;
+            return aggregateRecord;
         }
 
         protected SimpleDataPersistenceEngine CreateSut()
         {
             var adapter = new InMemoryAdapter();
+            adapter.SetKeyColumn("Aggregates", "AggregateId");
+            adapter.SetAutoIncrementColumn("EventsLog", "Sequence");
             Database.UseMockAdapter(adapter);
             var binarySerializer = new BinarySerializer();
             var sut = new SimpleDataPersistenceEngine(string.Empty, binarySerializer);

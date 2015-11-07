@@ -19,13 +19,13 @@
         protected AggregateRoot(Guid aggregateId)
             : this(null)
         {
-            this.RaiseEvent(new CreatedEvent(aggregateId));
+            this.RaiseEvent(new CreatedEvent(aggregateId, this.GetType().AssemblyQualifiedName));
         }
 
         protected AggregateRoot(Guid aggregateId, IRouteEvents eventRouter)
         {
             this.ResolveRouter(eventRouter);
-            this.RaiseEvent(new CreatedEvent(aggregateId));
+            this.RaiseEvent(new CreatedEvent(aggregateId, this.GetType().AssemblyQualifiedName));
         }
 
         public int Version { get; private set; }

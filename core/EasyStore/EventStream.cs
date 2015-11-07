@@ -74,6 +74,7 @@
         public void ClearChanges()
         {
             this._uncommitedEvents.Clear();
+            this._aggregates.Clear();
         }
 
         public TAggregate LoadAggregate<TAggregate>(Guid aggregateId) where TAggregate : AggregateRoot
@@ -83,7 +84,7 @@
 
             foreach (var persistedEvent in persistedEvents)
             {
-                (aggregate as IAggregate).ApplyEvent((IDomainEvent)persistedEvent.Body);
+                ((IAggregate)aggregate).ApplyEvent((IDomainEvent)persistedEvent.Body);
             }
 
             return aggregate;

@@ -19,5 +19,7 @@
         public Guid CommitId { get; set; }
 
         public string StreamId { get; set; }
+
+        public int Sequence { get; set; }
     }
 }
