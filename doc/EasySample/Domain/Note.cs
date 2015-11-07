@@ -9,6 +9,13 @@
 
     public class Note : AggregateRoot
     {
+        private Note()
+            : base(null)
+        {
+            this.RegisteredRoutes.Register<NoteCreatedEvent>(this.ApplyCreateNew);
+            this.RegisteredRoutes.Register<ChangedTitleEvent>(this.ApplyChangeTitle);
+        }
+
         private Note(Guid aggregateId, string title, string body)
             : this(aggregateId)
         {

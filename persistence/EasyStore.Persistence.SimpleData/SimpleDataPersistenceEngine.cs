@@ -18,7 +18,9 @@
 
         public SimpleDataPersistenceEngine(string connectionName, ISerialize serializer)
         {
-            this._db = Database.OpenNamedConnection(connectionName);
+           
+           this._db = Database.OpenNamedConnection(connectionName);
+          //  this._db = Database.Opener.OpenConnection(connectionName, "System.Data.SqlServer");
             this._serializer = serializer;
         }
 

@@ -53,7 +53,7 @@
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.ClearChanges();
         }
 
         public void Add(EventMessage uncommittedEvent)
@@ -81,7 +81,7 @@
         {
             var persistedEvents = this._persistence.GetAggregateEvents(aggregateId);
             TAggregate aggregate = this._aggregateConstructor.Build<TAggregate>();
-
+            ((IAggregate)aggregate).AttachToStream(this);
             foreach (var persistedEvent in persistedEvents)
             {
                 ((IAggregate)aggregate).ApplyEvent((IDomainEvent)persistedEvent.Body);

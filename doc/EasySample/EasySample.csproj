@@ -61,6 +61,14 @@
       <Project>{ce2c14ea-3883-401b-9078-019f2e100aa4}</Project>
       <Name>EasyStore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\persistence\EasyStore.Persistence.SimpleData\EasyStore.Persistence.SimpleData.csproj">
+      <Project>{84f8e79f-d1b2-4215-98dc-12f15c5ab220}</Project>
+      <Name>EasyStore.Persistence.SimpleData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\serialization\EasyStore.Serialization.Json\EasyStore.Serialization.Json.csproj">
+      <Project>{d58b6ef4-5e96-4715-8e41-5ef01b865761}</Project>
+      <Name>EasyStore.Serialization.Json</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
