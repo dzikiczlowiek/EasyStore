@@ -42,5 +42,39 @@
                                 @event.Body));
             }
         }
+
+        [Fact]
+        public void should_keep_event_order_apply()
+        {
+            var fixture = new GetAggregateEventsFixture();
+            var productAggregateId = A.RandomGuid();
+            var productAggregate = Product.CreateNew(productAggregateId).ChangeName(A.RandomShortString());
+
+            var persionAggregateId = A.RandomGuid();
+            var personAggregate =
+                Person.CreateNew(persionAggregateId)
+                    .ChangeAge(101)
+                    .ChangeName("Name1")
+                    .ChangeName("Name2")
+                    .ChangeAge(102)
+                    .ChangeName("Name3");
+
+            fixture.perists_aggregate_events(personAggregate, productAggregate);
+
+            var act = fixture.GetAggregateEvents(persionAggregateId);
+            act();
+
+            var aggregateEvents = personAggregate.ConvertUncommitedMessagesToEventMessages().ToList();
+            var givenEvents = fixture.Events.ToList();
+            for (int i = 0; i < aggregateEvents.Count; i++)
+            {
+                var givenEvent = givenEvents[i];
+                var expectedEvent = aggregateEvents[i];
+                ReflectionHelper.PublicInstancePropertiesEqual(
+                    expectedEvent.BodyType,
+                    expectedEvent.Body,
+                    givenEvent.Body).Should().BeTrue();
+            }
+        }
     }
 }

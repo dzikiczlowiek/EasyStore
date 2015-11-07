@@ -18,21 +18,18 @@
 
         public SimpleDataPersistenceEngine(string connectionName, ISerialize serializer)
         {
-           
-           this._db = Database.OpenNamedConnection(connectionName);
-          //  this._db = Database.Opener.OpenConnection(connectionName, "System.Data.SqlServer");
+            this._db = Database.OpenNamedConnection(connectionName);
             this._serializer = serializer;
         }
 
         public void Initialize()
         {
-            throw new System.NotImplementedException();
         }
 
         public IEnumerable<EventMessage> GetAggregateEvents(Guid aggregateId)
         {
             var events = new List<EventMessage>();
-            var rawEvents = this._db.EventsLog.FindAllByAggregateId(aggregateId);
+            var rawEvents = this._db.EventsLog.FindAllByAggregateId(aggregateId).OrderBySequence();
 
             foreach (var rawEvent in rawEvents)
             {
