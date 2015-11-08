@@ -1,53 +1,71 @@
 ﻿namespace EasyStore
 {
+    using System;
+
+    using EasyStore.DI;
     using EasyStore.Persistence;
 
     public class Wireup
     {
-        private NanoContainer _container;
+        private readonly IContainer _container;
 
-        private Wireup _inner;
-      
-        protected Wireup(NanoContainer container)
+        private readonly Wireup _inner;
+
+        protected Wireup(IContainer container)
         {
-            _container = container;
+            this._container = container;
         }
 
         protected Wireup(Wireup inner)
         {
-            _inner = inner;
+            this._inner = inner;
         }
 
-        protected NanoContainer Container
+        protected IContainer Container
         {
-            get { return _container ?? _inner.Container; }
+            get { return this._container ?? this._inner.Container; }
         }
 
         public static Wireup Init()
         {
-            var container = new NanoContainer();
-            container.Register(BuildEventStore);
+            var container = new EasyContainer();
+            container.Register<IStoreEvents>().Use(BuildEventStore);
 
             return new Wireup(container);
         }
 
-        public virtual Wireup With<T>(T instance) where T : class
+        public virtual Wireup With<T>(T instance)
+            where T : class
         {
-            Container.Register(instance);
+            this.Container.Register<T>().Use(instance);
+            return this;
+        }
+
+        public virtual Wireup With<T>(Func<IContainer, T> resolver)
+            where T : class
+        {
+            this.Container.Register<T>().Use(resolver);
+            return this;
+        }
+
+        public virtual Wireup With<TInterface, TConcrete>()
+            where TConcrete : class
+        {
+            this.Container.Register<TInterface>().Use<TConcrete>();
             return this;
         }
 
         public virtual IStoreEvents Build()
         {
-            if (_inner != null)
+            if (this._inner != null)
             {
-                return _inner.Build();
+                return this._inner.Build();
             }
 
-            return Container.Resolve<IStoreEvents>();
+            return this.Container.Resolve<IStoreEvents>();
         }
 
-        private static IStoreEvents BuildEventStore(NanoContainer context)
+        private static IStoreEvents BuildEventStore(IContainer context)
         {
             return new EventStore(context.Resolve<IPersistStreams>());
         }

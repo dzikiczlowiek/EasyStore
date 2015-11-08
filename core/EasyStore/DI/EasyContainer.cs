@@ -5,7 +5,7 @@
 
     using EasyStore;
 
-    public class Container : IContainer
+    public class EasyContainer : IContainer
     {
         private readonly IDictionary<Type, IContainerRegistration> _registrations =
             new Dictionary<Type, IContainerRegistration>();

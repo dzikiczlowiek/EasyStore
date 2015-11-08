@@ -8,7 +8,7 @@
 
     internal class ContainerRegistration : IContainerRegistration
     {
-        private Func<Container, object> _resolve;
+        private Func<EasyContainer, object> _resolve;
 
         private object _instance;
 
@@ -36,7 +36,7 @@
             return this;
         }
 
-        public virtual IContainerRegistration Use(Func<Container, object> resolve)
+        public virtual IContainerRegistration Use(Func<EasyContainer, object> resolve)
         {
             this._resolve = resolve;
             return this;
@@ -48,7 +48,7 @@
             return this;
         }
 
-        public virtual object Resolve(Container container)
+        public virtual object Resolve(EasyContainer container)
         {
             if (this._concreteType != null)
             {

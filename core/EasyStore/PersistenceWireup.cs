@@ -17,7 +17,7 @@
 
         public virtual PersistenceWireup WithPersistence(IPersistStreams instance)
         {
-            With(instance);
+            this.With(instance);
             return this;
         }
 
@@ -28,7 +28,7 @@
 
         public virtual PersistenceWireup InitializeStorageEngine()
         {
-            _initialize = true;
+            this._initialize = true;
             return this;
         }
 
@@ -39,21 +39,21 @@
                 throw new ArgumentNullException("instanceName", ExceptionMessages.InstanceCannotBeNull);
             }
 
-            _tracking = true;
-            _trackingInstanceName = instanceName;
+            this._tracking = true;
+            this._trackingInstanceName = instanceName;
             return this;
         }
 
         public override IStoreEvents Build()
         {
-            var engine = Container.Resolve<IPersistStreams>();
+            var engine = this.Container.Resolve<IPersistStreams>();
 
-            if (_initialize)
+            if (this._initialize)
             {
                 engine.Initialize();
             }
 
-            if (_tracking)
+            if (this._tracking)
             {
               //  Container.Register<IPersistStreams>(new PerformanceCounterPersistenceEngine(engine, _trackingInstanceName));
             }
@@ -67,7 +67,7 @@
         public SerializationWireup(Wireup inner, ISerialize serializer)
             : base(inner)
         {
-            Container.Register(serializer);
+            this.Container.Register<ISerialize>().Use(serializer);
         }
 
         //public SerializationWireup Compress()

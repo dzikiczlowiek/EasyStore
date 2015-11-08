@@ -7,6 +7,7 @@
 
     using EasyStore;
     using EasyStore.CommonDomain;
+    using EasyStore.Persistence;
     using EasyStore.Persistence.SimpleData;
     using EasyStore.Serialization.Json;
 
@@ -14,18 +15,21 @@
 
     class Program
     {
+        private static IStoreEvents store;
+
         static void Main(string[] args)
         {
-            LoadTest();
-            //451D80EF-6598-4041-B779-BFC5496BD3C9
+            store = Wireup.Init()
+                .With<ISerialize>(new JsonPayloadSerializer())
+                .UserSimpleDataPersistenceEngine("SD_ES")
+                .Build();
+
+            SaveTest();
         }
 
         private static void LoadTest()
         {
             var id = Guid.Parse("451D80EF-6598-4041-B779-BFC5496BD3C9");
-            var jsonSerializer = new JsonPayloadSerializer();
-            var simpleDataPersistence = new SimpleDataPersistenceEngine("SD_ES", jsonSerializer);
-            var store = new EventStore(simpleDataPersistence);
             using (var stream = store.CreateStream("ST1"))
             {
                 try

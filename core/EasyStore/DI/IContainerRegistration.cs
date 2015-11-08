@@ -6,12 +6,12 @@
     {
         IContainerRegistration InstancePerCall();
 
-        object Resolve(Container container);
+        object Resolve(EasyContainer container);
 
         IContainerRegistration Use<TConcrete>();
 
         IContainerRegistration Use(object instance);
 
-        IContainerRegistration Use(Func<Container, object> resolve);
+        IContainerRegistration Use(Func<EasyContainer, object> resolve);
     }
 }
