@@ -50,7 +50,11 @@
     <Compile Include="CommonDomain\IAggregate.cs" />
     <Compile Include="CommonDomain\IDomainEvent.cs" />
     <Compile Include="CommonDomain\IRouteEvents.cs" />
-    <Compile Include="Configuration.cs" />
+    <Compile Include="DI\Container.cs" />
+    <Compile Include="DI\ContainerRegistration.cs" />
+    <Compile Include="DI\IContainer.cs" />
+    <Compile Include="DI\IContainerRegistration.cs" />
+    <Compile Include="Wireup.cs" />
     <Compile Include="EventMessage.cs" />
     <Compile Include="EventStore.cs" />
     <Compile Include="EventStoreExtensions.cs" />
@@ -70,7 +74,7 @@
     <Compile Include="IStoreEvents.cs" />
     <Compile Include="CommitAttempt.cs" />
     <Compile Include="NanoContainer.cs" />
-    <Compile Include="PersistenceConfiguration.cs" />
+    <Compile Include="PersistenceWireup.cs" />
     <Compile Include="Persistence\Commit.cs" />
     <Compile Include="DefaultAggregateConstructor.cs" />
     <Compile Include="Persistence\IAccessSnapshots.cs" />
