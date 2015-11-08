@@ -2,7 +2,6 @@
 {
     using System;
 
-    using EasyStore.CommonDomain;
     using EasyStore.Infrastructure;
     using EasyStore.Persistence;
 

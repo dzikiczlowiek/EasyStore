@@ -55,7 +55,6 @@
     <Compile Include="Arrangement\DummyDomain\Product\ChangedCategoryEvent.cs" />
     <Compile Include="Arrangement\DummyDomain\Product\ChangedNameEvent.cs" />
     <Compile Include="Builders\CommitBuilderExtensions.cs" />
-    <Compile Include="Builders\EventMessageBuilder.cs" />
     <Compile Include="Builders\EventStreamValuesGenerator.cs" />
     <Compile Include="Collections.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

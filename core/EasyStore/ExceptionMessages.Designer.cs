@@ -68,5 +68,23 @@ namespace EasyStore {
                 return ResourceManager.GetString("HandlerNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instance cannot be null..
+        /// </summary>
+        internal static string InstanceCannotBeNull {
+            get {
+                return ResourceManager.GetString("InstanceCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type must be an interface..
+        /// </summary>
+        internal static string TypeMustBeInterface {
+            get {
+                return ResourceManager.GetString("TypeMustBeInterface", resourceCulture);
+            }
+        }
     }
 }

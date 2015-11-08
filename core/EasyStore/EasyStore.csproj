@@ -50,6 +50,7 @@
     <Compile Include="CommonDomain\IAggregate.cs" />
     <Compile Include="CommonDomain\IDomainEvent.cs" />
     <Compile Include="CommonDomain\IRouteEvents.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="EventMessage.cs" />
     <Compile Include="EventStore.cs" />
     <Compile Include="EventStoreExtensions.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="ISerialize.cs" />
     <Compile Include="IStoreEvents.cs" />
     <Compile Include="CommitAttempt.cs" />
+    <Compile Include="NanoContainer.cs" />
+    <Compile Include="PersistenceConfiguration.cs" />
     <Compile Include="Persistence\Commit.cs" />
     <Compile Include="DefaultAggregateConstructor.cs" />
     <Compile Include="Persistence\IAccessSnapshots.cs" />

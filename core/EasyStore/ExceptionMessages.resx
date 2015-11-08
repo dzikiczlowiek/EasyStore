@@ -120,4 +120,10 @@
   <data name="HandlerNotFound" xml:space="preserve">
     <value>Handler for event type '{0}' not found.</value>
   </data>
+  <data name="InstanceCannotBeNull" xml:space="preserve">
+    <value>Instance cannot be null.</value>
+  </data>
+  <data name="TypeMustBeInterface" xml:space="preserve">
+    <value>Type must be an interface.</value>
+  </data>
 </root>
