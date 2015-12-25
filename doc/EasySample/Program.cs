@@ -1,17 +1,12 @@
 ﻿namespace EasySample
 {
     using System;
-    using System.Diagnostics;
 
     using EasySample.Domain;
 
     using EasyStore;
-    using EasyStore.CommonDomain;
-    using EasyStore.Persistence;
     using EasyStore.Persistence.SimpleData;
     using EasyStore.Serialization.Json;
-
-    using Newtonsoft.Json;
 
     class Program
     {
@@ -24,7 +19,7 @@
                 .UserSimpleDataPersistenceEngine("SD_ES")
                 .Build();
 
-            SaveTest();
+            LoadTest();
         }
 
         private static void LoadTest()
